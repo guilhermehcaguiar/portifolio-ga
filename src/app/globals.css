@@ -10,8 +10,20 @@
   --accentCyan: #22D3EE;
 }
 
+/*
+ * Tokens da identidade GA. registrados no @theme para o Tailwind CSS 4
+ * gerar utilitários completos, inclusive com variantes (hover:, focus-visible:,
+ * disabled:). Sem esse registro, classes como hover:text-accentBlue,
+ * focus-visible:outline-accentBlue e border-border não geram CSS algum.
+ */
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accentBlue: var(--accentBlue);
+  --color-accentCyan: var(--accentCyan);
   --color-foreground: var(--primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -36,31 +48,12 @@ body {
 }
 
 @layer utilities {
-  .bg-background {
-    background-color: var(--background);
-  }
-  .surface {
-    background-color: var(--surface);
-  }
-  .border-border {
-    border-color: var(--border);
-  }
-  .text-primary {
-    color: var(--primary);
-  }
-  .text-secondary {
-    color: var(--secondary);
-  }
-  .text-accentBlue {
-    color: var(--accentBlue);
-  }
-  .text-accentCyan {
-    color: var(--accentCyan);
-  }
   .btn-primary {
-    @apply bg-accentBlue text-white font-medium px-4 py-2 rounded hover:bg-blue-600 transition-colors;
+    @apply text-white font-medium px-4 py-2 rounded hover:bg-blue-600 transition-colors;
+    background-color: var(--accentBlue);
   }
   .btn-secondary {
-    @apply bg-white text-primary font-medium px-4 py-2 rounded hover:bg-gray-100 transition-colors;
+    @apply bg-white font-medium px-4 py-2 rounded hover:bg-gray-100 transition-colors;
+    color: var(--primary);
   }
 }
