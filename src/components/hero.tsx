@@ -1,26 +1,18 @@
-"use client";
-
-import { useState } from "react";
-
 /**
- * Hero — Etapa A2
+ * Hero — Etapa A2 (CTA atualizado na A3.2)
  *
  * Tipografia dinâmica do nome "Guilherme Aguiar", subtítulo profissional
  * e dois CTAs hierarquizados: azul primário e ciano/transparente secundário,
  * conforme a identidade visual GA.
  *
- * Pendências documentadas:
- * - CTA "Ver projetos": ação informativa (mensagem real) até a seção de
- *   projetos existir na etapa A3 — sem âncora falsa.
- * - CTA "GitHub": link real; perfil verificado externamente
- *   (https://github.com/guilhermehcaguiar).
+ * CTA "Ver projetos": âncora real para a seção de projetos (#projetos).
+ * CTA "GitHub": link real; perfil verificado externamente
+ * (https://github.com/guilhermehcaguiar).
  */
 
 const GITHUB_URL = "https://github.com/guilhermehcaguiar";
 
 export default function Hero() {
-  const [projectsNoteVisible, setProjectsNoteVisible] = useState(false);
-
   return (
     <section
       aria-labelledby="hero-title"
@@ -48,15 +40,14 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              {/* CTA primário — ação informativa até a seção de projetos (A3) */}
-              <button
-                type="button"
-                onClick={() => setProjectsNoteVisible(true)}
+              {/* CTA primário — âncora real para a seção de projetos */}
+              <a
+                href="#projetos"
                 aria-label="Ver projetos do portfólio GA"
-                className="rounded bg-accentBlue px-6 py-3 font-medium text-white transition-colors hover:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
+                className="rounded bg-blue-600 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
               >
                 Ver projetos
-              </button>
+              </a>
 
               {/* CTA secundário — link real para o GitHub verificado */}
               <a
@@ -70,15 +61,6 @@ export default function Hero() {
               </a>
             </div>
 
-            {projectsNoteVisible && (
-              <p
-                id="hero-projects-note"
-                role="status"
-                className="mt-4 text-sm text-secondary"
-              >
-                Seção de projetos em desenvolvimento — em breve.
-              </p>
-            )}
           </div>
 
           {/* Elemento tipográfico decorativo */}

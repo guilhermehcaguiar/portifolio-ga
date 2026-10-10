@@ -53,9 +53,9 @@ export default function Navbar() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [menuOpen]);
 
-  // Fecha o menu se a viewport voltar ao breakpoint desktop (sm).
+  // Fecha o menu se a viewport voltar ao breakpoint desktop (md).
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 640px)");
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
     const handleChange = (event: MediaQueryListEvent) => {
       if (event.matches) setMenuOpen(false);
     };
@@ -86,7 +86,7 @@ export default function Navbar() {
         </span>
 
         {/* Links de navegação (desktop) */}
-        <div className="hidden items-center gap-8 sm:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.key}
@@ -105,7 +105,7 @@ export default function Navbar() {
             type="button"
             disabled
             title="Currículo em PDF — integração pendente"
-            className="hidden items-center gap-2 rounded border border-border px-4 py-2 font-medium text-secondary disabled:cursor-not-allowed disabled:opacity-50 sm:inline-flex"
+            className="hidden items-center gap-2 rounded border border-border px-4 py-2 font-medium text-secondary disabled:cursor-not-allowed disabled:opacity-50 md:inline-flex"
           >
             Currículo
             <span className="sr-only">(disponível em breve)</span>
@@ -135,7 +135,7 @@ export default function Navbar() {
             aria-label={
               menuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"
             }
-            className="p-2 text-accentBlue transition-colors hover:text-accentCyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue sm:hidden"
+            className="p-2 text-accentBlue transition-colors hover:text-accentCyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue md:hidden"
           >
             {menuOpen ? (
               <svg
@@ -175,7 +175,7 @@ export default function Navbar() {
       <div
         id="mobile-menu"
         hidden={!menuOpen}
-        className="border-t border-border bg-background/95 backdrop-blur-md sm:hidden"
+        className="border-t border-border bg-background/95 backdrop-blur-md md:hidden"
       >
         <div className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-6 sm:px-8">
           {navLinks.map((link, index) => (
