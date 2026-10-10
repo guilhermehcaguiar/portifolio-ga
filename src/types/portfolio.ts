@@ -30,3 +30,17 @@ export interface ProjectsData {
   main: Project[];
   secondary: Project[];
 }
+
+export interface StackCategory {
+  key: string;
+  title: string;
+  items: string[];
+}
+
+export interface BeyondInterest {
+  key: string;
+  title: string;
+  description: string | null; // pendente → não renderiza
+  icon: string; // nome Lucide resolvido pelo componente
+  link: ProjectLink | null; // href null = não clicável
+}

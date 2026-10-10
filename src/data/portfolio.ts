@@ -1,7 +1,9 @@
 import type {
   AboutData,
+  BeyondInterest,
   ExperienceItem,
   ProjectsData,
+  StackCategory,
 } from "@/types/portfolio";
 
 // Conteúdo derivado exclusivamente do perfil público verificado do GitHub
@@ -70,3 +72,24 @@ export const projects: ProjectsData = {
     { key: "orbit", name: "Orbit", type: "Sistema Integrado Estudantil", description: null, technologies: [], links: [] },
   ],
 };
+
+export const stack: StackCategory[] = [
+  { key: "linguagens", title: "Linguagens", items: ["TypeScript", "JavaScript", "Python"] },
+  { key: "frontend", title: "Frontend", items: ["React", "Next.js", "Tailwind CSS"] },
+  { key: "backend", title: "Backend", items: ["Node.js"] },
+  // PENDÊNCIA A3 — slots vazios nomeados: preencher quando confirmado. Não inventar.
+  { key: "banco-de-dados", title: "Banco de dados", items: [] },
+  { key: "ferramentas", title: "Ferramentas", items: [] },
+  { key: "explorando", title: "Explorando", items: ["Inteligência Artificial"] },
+];
+
+export const beyondInterests: BeyondInterest[] = [
+  // PENDÊNCIA A3 — descrições e links conforme o usuário fornecer.
+  // Ícones Lucide substituídos (registrado no relatório da A3.3):
+  // folder-git-2 → git-branch; brain-circuit → bot.
+  { key: "projetos-pessoais", title: "Projetos pessoais", description: null, icon: "git-branch", link: null },
+  { key: "eletronica", title: "Eletrônica", description: null, icon: "cpu", link: null },
+  { key: "linux", title: "Linux", description: null, icon: "terminal", link: null },
+  { key: "automacao", title: "Automação", description: null, icon: "zap", link: null },
+  { key: "ia-local", title: "IA local", description: null, icon: "bot", link: null },
+];
