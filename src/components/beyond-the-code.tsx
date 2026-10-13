@@ -147,6 +147,7 @@ export default function BeyondTheCode({ interests }: BeyondTheCodeProps) {
                     className="mt-4 inline-flex text-accentBlue transition-colors hover:text-accentCyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
                   >
                     {interest.link.label}
+                    <span className="sr-only"> (abre em uma nova aba)</span>
                   </a>
                 )}
               </article>

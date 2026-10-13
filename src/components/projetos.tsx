@@ -63,6 +63,7 @@ function ProjectLinks({
           className="text-accentBlue transition-colors hover:text-accentCyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
         >
           {link.label}
+          <span className="sr-only"> (abre em uma nova aba)</span>
         </a>
       ))}
     </div>
@@ -159,28 +160,28 @@ export default function Projetos({ projects }: ProjetosProps) {
                   className="group rounded-lg border border-border"
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue [&::-webkit-details-marker]:hidden">
-                    <span className="font-medium text-primary">
-                      {project.name}
-                    </span>
-                    <span className="flex items-center gap-4">
+                    <span className="flex min-w-0 flex-col">
+                      <span className="font-medium text-primary">
+                        {project.name}
+                      </span>
                       {project.type && (
-                        <span className="hidden font-mono text-sm text-secondary sm:inline">
+                        <span className="mt-0.5 font-mono text-sm text-secondary">
                           {project.type}
                         </span>
                       )}
-                      <svg
-                        className="h-4 w-4 shrink-0 text-secondary transition-transform group-open:rotate-180"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
-                        <polyline points="6 9 12 15 18 9" />
-                      </svg>
                     </span>
+                    <svg
+                      className="h-4 w-4 shrink-0 text-secondary transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
                   </summary>
                   <div className="space-y-4 border-t border-border px-6 py-6">
                     {project.description && (

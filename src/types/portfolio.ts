@@ -52,3 +52,10 @@ export interface ContactChannel {
   href: string | null; // null = pendente → card não renderiza
   icon: string; // nome Lucide resolvido pelo componente
 }
+
+export interface PersonData {
+  name: string;
+  jobTitle: string | null; // apenas nomenclatura já consolidada no site
+  description: string | null; // derivada da bio pública verificada
+  sameAs: string[]; // perfis verificados (GitHub, LinkedIn)
+}

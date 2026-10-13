@@ -7,7 +7,7 @@
 | **A1** | Fundação técnica | ✅ **Concluída** | Next.js 16.4.0, React 19.3.0, TS 5.x, Tailwind 4, App Router, tokens GA., fontes Geist, layout-base |
 | **A2** | Navbar e Hero | ✅ **Concluída** | Navbar fixa com blur, Hero com tipografia dinâmica, CTAs hierarquizados, responsividade 320–1440px; inclui correções P1 (contraste do CTA primário e breakpoint `md` da navbar) e `lang="pt-BR"` |
 | **A3** | Conteúdo e Projetos | ✅ **Concluída** | Sobre, Experiência, Stack, Beyond the Code, Projetos (Alambrado em destaque), Contato e Footer — estrutura completa das 6 seções + footer com camada centralizada de dados; conteúdo definitivo pendente por decisão (ver seção abaixo) |
-| **A4** | SEO e Acessibilidade | ⏳ **Pendente** | Metadata API, Open Graph, Twitter Cards, JSON-LD Person, contraste, foco, semântica HTML |
+| **A4** | SEO e Acessibilidade | ✅ **Concluída** | Metadata API (Open Graph/Twitter/robots/themeColor), JSON-LD Person, skip-link `#conteudo`, `prefers-reduced-motion` no chevron, P2.1/P2.2/P2.3 resolvidos, contraste AA auditado; canonical/OG image/schema WebSite aguardam domínio real (A5) |
 | **A5** | Refinamento e Publicação | ⏳ **Pendente** | Responsividade final, refinar visual, animações sutis, performance, otimizações, docs, preparação deploy |
 
 ## Dependências
@@ -37,10 +37,9 @@ Preencher quando disponível, **somente em `src/data/portfolio.ts`** (os compone
 Regra permanente do projeto: **não inventar experiências, métricas, URLs ou tecnologias**.
 
 ## Próximas Ações (após autorização)
-1. **A4:** Aplicar metadata, Open Graph, Twitter Cards, JSON-LD, auditoria formal de acessibilidade/contraste, `prefers-reduced-motion`, skip-link
-2. **A5:** Responsividade final, performance (Lighthouse > 90), unificações registradas na arquitetura, animações sutis, preparação para Vercel deploy
+1. **A5:** Responsividade final, performance (Lighthouse > 90), unificações registradas na arquitetura, animações sutis, imagens/OG + canonical/schema WebSite (exigem domínio), preparação para Vercel deploy
 
 ## Observações
-- Etapas A2 e A3 foram concluídas com subetapas aprovadas individualmente pelo usuário.
+- Etapas A2, A3 e A4 foram concluídas com aprovação individual do usuário.
 - Cada etapa futura (A4, A5) deve ser solicitada e aprovada individualmente.
 - Documentação em `docs/` atualizada a cada conclusão de etapa (feito na A3.5).

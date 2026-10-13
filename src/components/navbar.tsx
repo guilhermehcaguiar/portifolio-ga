@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 
 /**
  * Navbar — Etapa A2
@@ -32,15 +32,27 @@ const navLinks: NavLink[] = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
+  // P2.1: instrui o efeito a focar o primeiro link apenas quando o menu
+  // for aberto por teclado (Enter/Espaço). Ref, não state — não precisa
+  // re-renderizar e evita set-state-in-effect.
+  const focusOnOpenRef = useRef(false);
 
-  // Ao abrir: foca o primeiro link do menu.
-  // Escape: fecha o menu e devolve o foco ao botão de alternância.
+  // Ao abrir por teclado: foca o primeiro link (P2.1 — apenas quando a
+  // abertura veio de Enter/Espaço; mouse/toque não teleporta o foco).
+  // Escape: fecha e devolve o foco ao botão de alternância.
+  // Clique fora (P2.2): fecha sem mover o foco. Painel é disclosure
+  // não-modal — focus trap deliberadamente rejeitado (decisão registrada
+  // em docs/arquitetura.md).
   useEffect(() => {
     if (!menuOpen) return;
 
-    firstMobileLinkRef.current?.focus();
+    if (focusOnOpenRef.current) {
+      firstMobileLinkRef.current?.focus();
+      focusOnOpenRef.current = false;
+    }
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -49,8 +61,18 @@ export default function Navbar() {
       }
     };
 
+    const handlePointerDown = (event: PointerEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
   }, [menuOpen]);
 
   // Fecha o menu se a viewport voltar ao breakpoint desktop (md).
@@ -63,8 +85,14 @@ export default function Navbar() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  const toggleMenu = () => {
-    setMenuOpen((open) => !open);
+  // P2.1: event.detail === 0 indica ativação por teclado (Enter/Espaço).
+  const toggleMenu = (event: MouseEvent<HTMLButtonElement>) => {
+    if (menuOpen) {
+      closeMenu();
+      return;
+    }
+    focusOnOpenRef.current = event.detail === 0;
+    setMenuOpen(true);
   };
 
   // Fecha o menu devolvendo o foco ao botão de alternância — usado no
@@ -76,6 +104,7 @@ export default function Navbar() {
 
   return (
     <nav
+      ref={navRef}
       aria-label="Navegação principal"
       className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md"
     >

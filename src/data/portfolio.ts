@@ -3,9 +3,24 @@ import type {
   BeyondInterest,
   ContactChannel,
   ExperienceItem,
+  PersonData,
   ProjectsData,
   StackCategory,
 } from "@/types/portfolio";
+
+// Identidade do site — consumida pelo JSON-LD (layout.tsx) e futuros metadados.
+// jobTitle consolidado no site atual (kicker do Hero + description do layout);
+// descrição derivada da bio pública verificada; sameAs verificados nesta sessão.
+export const person: PersonData = {
+  name: "Guilherme Aguiar",
+  jobTitle: "Software Developer",
+  description:
+    "Desenvolvedor full-stack e estudante de Ciência da Computação, com interesse em React, Node.js, Python e Inteligência Artificial.",
+  sameAs: [
+    "https://github.com/guilhermehcaguiar",
+    "https://www.linkedin.com/in/guilhermehcaguiar",
+  ],
+};
 
 // Conteúdo derivado exclusivamente do perfil público verificado do GitHub
 // (guilhermehcaguiar) — não alterar sem aprovação.

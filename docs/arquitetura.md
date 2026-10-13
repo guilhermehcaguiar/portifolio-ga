@@ -42,7 +42,8 @@ src/
 - **Tailwind:** Tokens da identidade em `globals.css` via `:root` e `@theme inline` (gera utilitários com variantes)
 - **Seções:** casca padrão `scroll-mt-28 border-t border-border py-24 sm:py-32` + container `mx-auto max-w-5xl px-6 sm:px-8` + `SectionHeading` com kickers numerados fixos (01 Sobre, 02 Projetos, 03 Experiência, 04 Stack, 05 Beyond the Code, 06 Contato)
 - **Ícones:** Lucide inline SVG (sem dependências), mapa por nome + fallback
-- **Acessibilidade:** foco visível `focus-visible:outline-accentBlue`, `aria-labelledby` por seção, accordion nativo `<details>/<summary>`, um único h1 (Hero) e um h2 por seção
+- **Acessibilidade:** foco visível `focus-visible:outline-accentBlue`, `aria-labelledby` por seção, accordion nativo `<details>/<summary>`, um único h1 (Hero) e um h2 por seção, skip-link "Pular para o conteúdo" (`#conteudo`), dicas `sr-only` em links externos, `motion-reduce` apenas no chevron (transições de cor preservadas)
+- **SEO/Metadata:** Metadata API em `layout.tsx` (Open Graph, Twitter, robots, themeColor); JSON-LD `Person` consumindo a camada de dados; campos dependentes de domínio (canonical, og:url, OG image, schema WebSite) ficam para a A5
 - **Metadados:** `metadata` em `layout.tsx`, título/description por página quando necessário
 - **Responsividade:** mobile-first; navbar mobile até `md` (768px)
 - **Tipagem:** TypeScript em todos os arquivos; evitar `any` quando possível
@@ -57,3 +58,5 @@ src/
 7. **Deploy futuro:** Vercel, somente quando autorizado pelo usuário (A5)
 8. **Duplicações conhecidas (registradas; unificação opcional na A5):** `navLinks` (navbar) ↔ `footerLinks` (footer); URL do GitHub em 3 fontes (hero, footer, data)
 9. **Currículo:** botão da navbar desabilitado até a integração do PDF
+10. **A4 concluída:** SEO + acessibilidade — metadata estendida, JSON-LD Person (jobTitle "Software Developer", nomenclatura consolidada no site), skip-link, clique-fora no menu, foco no primeiro link apenas quando aberto por teclado, tipo dos secundários visível em mobile, `motion-reduce` no chevron — status: ✅
+11. **Focus trap rejeitado** para o menu mobile: painel é disclosure não-modal ancorado na navbar; clique-fora + Escape cobrem os casos reais sem complexidade extra
