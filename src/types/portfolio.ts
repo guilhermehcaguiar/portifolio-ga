@@ -44,3 +44,11 @@ export interface BeyondInterest {
   icon: string; // nome Lucide resolvido pelo componente
   link: ProjectLink | null; // href null = não clicável
 }
+
+export interface ContactChannel {
+  key: string;
+  label: string; // rótulo exibido (ex.: "GitHub", "LinkedIn", "E-mail")
+  handle: string | null; // texto secundário (ex.: "github.com/guilhermehcaguiar")
+  href: string | null; // null = pendente → card não renderiza
+  icon: string; // nome Lucide resolvido pelo componente
+}

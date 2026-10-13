@@ -4,9 +4,12 @@ import Projetos from "@/components/projetos";
 import Experiencia from "@/components/experiencia";
 import Stack from "@/components/stack";
 import BeyondTheCode from "@/components/beyond-the-code";
+import Contato from "@/components/contato";
+import Footer from "@/components/footer";
 import {
   about,
   beyondInterests,
+  contactChannels,
   experience,
   projects,
   stack,
@@ -21,6 +24,8 @@ export default function Home() {
       <Experiencia items={experience} />
       <Stack categories={stack} />
       <BeyondTheCode interests={beyondInterests} />
+      <Contato channels={contactChannels} />
+      <Footer />
     </>
   );
 }

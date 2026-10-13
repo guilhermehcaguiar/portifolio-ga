@@ -1,6 +1,7 @@
 import type {
   AboutData,
   BeyondInterest,
+  ContactChannel,
   ExperienceItem,
   ProjectsData,
   StackCategory,
@@ -92,4 +93,29 @@ export const beyondInterests: BeyondInterest[] = [
   { key: "linux", title: "Linux", description: null, icon: "terminal", link: null },
   { key: "automacao", title: "Automação", description: null, icon: "zap", link: null },
   { key: "ia-local", title: "IA local", description: null, icon: "bot", link: null },
+];
+
+export const contactChannels: ContactChannel[] = [
+  {
+    key: "github",
+    label: "GitHub",
+    handle: "github.com/guilhermehcaguiar",
+    href: "https://github.com/guilhermehcaguiar",
+    icon: "github",
+  },
+  {
+    key: "linkedin",
+    label: "LinkedIn",
+    handle: "in/guilhermehcaguiar",
+    href: "https://www.linkedin.com/in/guilhermehcaguiar",
+    icon: "linkedin",
+  },
+  // PENDÊNCIA A3 — e-mail a fornecer; preencher href com "mailto:" + endereço.
+  {
+    key: "email",
+    label: "E-mail",
+    handle: null,
+    href: null,
+    icon: "mail",
+  },
 ];
