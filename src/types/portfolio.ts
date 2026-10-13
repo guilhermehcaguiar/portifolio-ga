@@ -23,7 +23,9 @@ export interface Project {
   description: string | null;
   technologies: string[];
   isFeatured?: boolean;
-  links: ProjectLink[];
+  isAcademic: boolean; // projeto acadêmico → exibe tag discreta "Acadêmico" (não inferir por type/descrição)
+  deployUrl: string | null; // site público ativo — destino principal do card (A5)
+  repositoryUrl: string | null; // repositório GitHub verificado
 }
 
 export interface ProjectsData {
@@ -58,4 +60,11 @@ export interface PersonData {
   jobTitle: string | null; // apenas nomenclatura já consolidada no site
   description: string | null; // derivada da bio pública verificada
   sameAs: string[]; // perfis verificados (GitHub, LinkedIn)
+}
+
+export interface HeroData {
+  kicker: string; // rótulo profissional acima do nome
+  firstName: string; // "Guilherme"
+  lastName: string; // "Aguiar"
+  quote: string; // citação profissional
 }

@@ -12,9 +12,10 @@
 
 /*
  * Tokens da identidade GA. registrados no @theme para o Tailwind CSS 4
- * gerar utilitários completos, inclusive com variantes (hover:, focus-visible:,
- * disabled:). Sem esse registro, classes como hover:text-accentBlue,
- * focus-visible:outline-accentBlue e border-border não geram CSS algum.
+ * gerar utilitários completos, inclusive com variantes (hover:,
+ * focus-visible:, disabled:). Sem esse registro, classes como
+ * hover:text-accentBlue, focus-visible:outline-accentBlue e
+ * border-border não geram CSS algum.
  */
 @theme inline {
   --color-background: var(--background);
@@ -29,31 +30,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0B0F14;
-    --surface: #111827;
-    --border: #1F2937;
-    --primary: #F8FAFC;
-    --secondary: #94A3B8;
-    --accentBlue: #3B82F6;
-    --accentCyan: #22D3EE;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--primary);
   font-family: var(--font-geist-sans), sans-serif;
-}
-
-@layer utilities {
-  .btn-primary {
-    @apply text-white font-medium px-4 py-2 rounded hover:bg-blue-600 transition-colors;
-    background-color: var(--accentBlue);
-  }
-  .btn-secondary {
-    @apply bg-white font-medium px-4 py-2 rounded hover:bg-gray-100 transition-colors;
-    color: var(--primary);
-  }
 }

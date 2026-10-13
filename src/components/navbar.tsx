@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 
+import { sectionLinks } from "@/lib/section-links";
+
 /**
  * Navbar — Etapa A2
  *
@@ -15,20 +17,6 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
  * - O logo GA. é texto sem link: não há destino real ainda (decisão de
  *   honestidade — nenhum elemento falso apresentado como funcional).
  */
-
-type NavLink = {
-  key: string;
-  label: string;
-  href: string;
-};
-
-const navLinks: NavLink[] = [
-  { key: "sobre", label: "Sobre", href: "#sobre" },
-  { key: "projetos", label: "Projetos", href: "#projetos" },
-  { key: "experiencia", label: "Experiência", href: "#experiencia" },
-  { key: "stack", label: "Stack", href: "#stack" },
-  { key: "contato", label: "Contato", href: "#contato" },
-];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -116,11 +104,11 @@ export default function Navbar() {
 
         {/* Links de navegação (desktop) */}
         <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
+          {sectionLinks.map((link) => (
             <a
               key={link.key}
               href={link.href}
-              className="text-secondary transition-colors hover:text-accentBlue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
+              className="py-2 text-secondary transition-colors hover:text-accentBlue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
             >
               {link.label}
             </a>
@@ -207,7 +195,7 @@ export default function Navbar() {
         className="border-t border-border bg-background/95 backdrop-blur-md md:hidden"
       >
         <div className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-6 sm:px-8">
-          {navLinks.map((link, index) => (
+          {sectionLinks.map((link, index) => (
             <a
               key={link.key}
               href={link.href}

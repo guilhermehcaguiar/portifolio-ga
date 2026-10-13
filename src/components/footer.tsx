@@ -1,25 +1,15 @@
+import { githubProfileUrl } from "@/data/portfolio";
+import { sectionLinks } from "@/lib/section-links";
+
 /**
- * Footer — Etapa A3.4
+ * Footer — Etapas A3.4/A5
  *
  * Encerramento visual: logo GA. com ponto azul (sem link — sem destino
- * real), âncoras das seções, © 2026 (ano estático, sem risco de
- * hidratação), nota factual das tecnologias e link real para o GitHub.
- * Server Component, sem props.
+ * real), âncoras das seções (unificadas com a navbar via
+ * @/lib/section-links), © 2026 (ano estático, sem risco de hidratação),
+ * nota factual das tecnologias e link real para o GitHub
+ * (githubProfileUrl — única fonte da URL). Server Component, sem props.
  */
-
-const GITHUB_URL = "https://github.com/guilhermehcaguiar";
-
-// Mesmas âncoras da navbar (navLinks). Duplicação consciente: extrair
-// para a camada de dados exigiria alterar navbar.tsx, fora do escopo
-// aprovado. Avaliada na A3.5 — decisão: manter duplicação registrada
-// em docs/arquitetura.md; unificação opcional na A5.
-const footerLinks = [
-  { key: "sobre", label: "Sobre", href: "#sobre" },
-  { key: "projetos", label: "Projetos", href: "#projetos" },
-  { key: "experiencia", label: "Experiência", href: "#experiencia" },
-  { key: "stack", label: "Stack", href: "#stack" },
-  { key: "contato", label: "Contato", href: "#contato" },
-];
 
 export default function Footer() {
   return (
@@ -32,11 +22,11 @@ export default function Footer() {
 
           <nav aria-label="Seções do site">
             <ul className="flex flex-wrap gap-x-6 gap-y-2">
-              {footerLinks.map((link) => (
+              {sectionLinks.map((link) => (
                 <li key={link.key}>
                   <a
                     href={link.href}
-                    className="text-secondary transition-colors hover:text-accentBlue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
+                    className="inline-flex items-center py-2 text-secondary transition-colors hover:text-accentBlue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
                   >
                     {link.label}
                   </a>
@@ -50,7 +40,7 @@ export default function Footer() {
           <p>© 2026 Guilherme Aguiar</p>
           <p>Feito com Next.js, React e Tailwind CSS</p>
           <a
-            href={GITHUB_URL}
+            href={githubProfileUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-accentBlue transition-colors hover:text-accentCyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"

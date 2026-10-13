@@ -1,16 +1,17 @@
+import { githubProfileUrl, hero } from "@/data/portfolio";
+
 /**
- * Hero — Etapa A2 (CTA atualizado na A3.2)
+ * Hero — Etapas A2/A3.2/A5
  *
  * Tipografia dinâmica do nome "Guilherme Aguiar", subtítulo profissional
  * e dois CTAs hierarquizados: azul primário e ciano/transparente secundário,
  * conforme a identidade visual GA.
  *
- * CTA "Ver projetos": âncora real para a seção de projetos (#projetos).
- * CTA "GitHub": link real; perfil verificado externamente
- * (https://github.com/guilhermehcaguiar).
+ * A5: conteúdo profissional centralizado em @/data/portfolio (HeroData);
+ * monograma decorativo e ponto da marca permanecem no JSX (decoração).
+ * Zero mudança visual. CTA "Ver projetos": âncora real #projetos.
+ * CTA "GitHub": githubProfileUrl — única fonte da URL.
  */
-
-const GITHUB_URL = "https://github.com/guilhermehcaguiar";
 
 export default function Hero() {
   return (
@@ -23,20 +24,19 @@ export default function Hero() {
           {/* Tratamento tipográfico do nome */}
           <div>
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-accentCyan">
-              Software Developer
+              {hero.kicker}
             </p>
 
             <h1
               id="hero-title"
               className="mb-6 text-5xl font-bold leading-none tracking-tight sm:text-6xl lg:text-7xl"
             >
-              <span className="block">Guilherme</span>
-              <span className="block text-secondary">Aguiar</span>
+              <span className="block">{hero.firstName}</span>
+              <span className="block text-secondary">{hero.lastName}</span>
             </h1>
 
             <p className="mb-8 text-lg leading-relaxed text-secondary sm:text-xl">
-              &ldquo;Desenvolvo aplicações web e ferramentas que transformam
-              problemas reais em soluções simples e eficientes.&rdquo;
+              &ldquo;{hero.quote}&rdquo;
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -51,7 +51,7 @@ export default function Hero() {
 
               {/* CTA secundário — link real para o GitHub verificado */}
               <a
-                href={GITHUB_URL}
+                href={githubProfileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded border border-accentCyan/60 bg-transparent px-6 py-3 font-medium text-accentCyan transition-colors hover:border-accentCyan hover:bg-accentCyan/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentCyan"
@@ -60,7 +60,6 @@ export default function Hero() {
                 <span className="sr-only"> (abre em uma nova aba)</span>
               </a>
             </div>
-
           </div>
 
           {/* Elemento tipográfico decorativo */}
