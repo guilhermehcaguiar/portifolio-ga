@@ -11,7 +11,8 @@ const GITHUB_URL = "https://github.com/guilhermehcaguiar";
 
 // Mesmas âncoras da navbar (navLinks). Duplicação consciente: extrair
 // para a camada de dados exigiria alterar navbar.tsx, fora do escopo
-// aprovado da A3.4; unificação pode ser avaliada na A3.5.
+// aprovado. Avaliada na A3.5 — decisão: manter duplicação registrada
+// em docs/arquitetura.md; unificação opcional na A5.
 const footerLinks = [
   { key: "sobre", label: "Sobre", href: "#sobre" },
   { key: "projetos", label: "Projetos", href: "#projetos" },
