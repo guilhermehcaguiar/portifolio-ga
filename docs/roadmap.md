@@ -52,3 +52,63 @@ Regra permanente do projeto: **não inventar experiências, métricas, URLs ou t
 - Etapas A2, A3 e A4 foram concluídas com aprovação individual do usuário.
 - Cada etapa futura (A4, A5) deve ser solicitada e aprovada individualmente.
 - Documentação em `docs/` atualizada a cada conclusão de etapa (feito na A3.5).
+
+## Revisão integrada autorizada — 26/10/2026
+
+O usuário autorizou nesta conversa aplicar as melhorias da auditoria em uma etapa funcional de revisão do portfólio. Esta autorização inclui estabilização PT/EN, conteúdo, UI/UX, contato e preparação de currículos/SEO. Não inclui commit, push ou publicação.
+
+### Entregas desta revisão
+
+- Composição e documento compartilhados; eliminadas rota portuguesa concorrente, HTML aninhado, main/IDs duplicados e navegação inglesa quebrada.
+- Tradução de interface e conteúdo; seletor de idioma nas duas páginas.
+- Projetos antes de Sobre, espaçamento revisado e interesses compactos com texto.
+- Alambrado com URL pública, captura real e autoria integral confirmada, contexto e resultado.
+- E-mail confirmado: `guilherme.ghca@hotmail.com`, links mailto sem nova aba.
+- Pasta `public/curriculos/` preparada para os PDFs PT/EN com ativação automática por idioma no build.
+- Experiência vazia oculta e removida da navegação; nenhuma empresa, data ou cargo inventado.
+- Dependências alinhadas e corrigidas para vulnerabilidades conhecidas; Next.js/eslint-config-next 16.4.3.
+- Metadata traduzida, imagem social GA., favicon, robots e sitemap preparados via SITE_URL.
+- README real, documentação atualizada e testes de navegador/CI adicionados.
+
+### Pendências reais após a revisão
+
+1. Adicionar PDFs finais em `public/curriculos/guilherme-aguiar-pt-br.pdf` e `public/curriculos/guilherme-aguiar-en.pdf`; reiniciar/recompilar depois.
+2. Fornecer empresa, cargo, período e contribuições para a experiência; a seção permanece fora da página até integração autorizada.
+3. Confirmar novo destino público de TransLog e contribuições individuais detalhadas dos demais projetos.
+4. Informar domínio público do portfólio, definir SITE_URL e autorizar deploy. A URL do Alambrado não é o domínio deste portfólio.
+5. Validar com leitor de tela e em outros navegadores/dispositivos, além dos checks de Chromium executados nesta etapa.
+
+Os itens históricos acima descrevem entregas anteriores; esta revisão substitui as pendências antigas de e-mail e deploy do Alambrado. Nenhuma nova etapa começa automaticamente.
+
+### Validação da revisão
+
+Build, lint, TypeScript e 20 testes de navegador aprovados; npm audit sem vulnerabilidades conhecidas. Lighthouse mobile local: desempenho 83, acessibilidade 100, boas práticas 100 e SEO 100. A meta de desempenho >90 continua pendente de otimização/medição no deploy. Evidências e limites em `docs/verificacao-2026-10-26.md`.
+
+### Complemento de conteúdo e stack — 26/10/2026
+
+- Java, SQL e Git confirmados pelo usuário e incluídos na Stack; Banco de dados e Ferramentas agora têm conteúdo.
+- Hardware e automação adicionados a Explorando, com tradução para inglês e textos de interesses atualizados.
+- Tecnologias dos cards de Stack e Projetos organizadas verticalmente, uma por linha.
+- Resultados qualitativos de AutoShop Payables e AutoFilter Search atualizados com os impactos confirmados pelo usuário. Payables está em operação; não foi inventada uma URL pública nem métricas numéricas.
+
+### Posicionamento profissional e estudos — 26/10/2026
+
+A pedido do usuário, a apresentação passou a enfatizar desenvolvimento de software de forma ampla. Java e Python são os estudos em aprofundamento; Machine Learning e cibersegurança são interesses confirmados. Hardware e automação continuam como exploração. Hero, Sobre, card de estudos, Stack/Explorando, interesses, metadata e imagem social foram alinhados em PT/EN. Não se atribui experiência profissional, projetos ou especialização em ML/cibersegurança. React e tecnologias web permanecem associados aos projetos e à Stack, sem definir exclusivamente o foco de estudos.
+
+Correção do resumo: aprofundamento em front-end com React mantido junto de Java e Python no Hero, Sobre e card de estudos em PT/EN. Ampliar o posicionamento para software não deve apagar a dedicação a front-end. Interesses em Machine Learning, cibersegurança, hardware e automação preservados.
+
+Precisão adicional do resumo: front-end concentra a maior parte dos projetos atuais, muito por influência das atividades da faculdade. Isso deve aparecer como contexto da prática atual, junto do estudo de Java, Python e outras áreas, preservando os interesses em Machine Learning, cibersegurança, hardware e automação. Hero e Sobre alinhados em PT/EN.
+
+### Refinamento visual e movimento — 26/10/2026
+
+Usuário autorizou aplicar as propostas de layout/animação: fundo do destaque unificado à paleta GA., imagem centralizada e ampliável, galeria com capturas reais de catálogo/carrinho, hierarquia das ações, alinhamento dos cards, indicador de seção ativa, entrada de seções/Hero, hover, menu e accordion suaves. Tecnologias verticais preservadas, com suporte a movimento reduzido e sem biblioteca de animação adicional. Novos testes cobrem galeria, modal/foco, navegação ativa e reduced motion. Commit, push e deploy não foram executados.
+
+Validação do refinamento: build, lint e 50 testes PT/EN aprovados. Lighthouse local: acessibilidade/boas práticas/SEO 100; desempenho 69 em execução com benchmark de CPU inferior ao da medição anterior. Meta >90 continua pendente e precisa ser reavaliada em produção. Detalhes em `docs/verificacao-2026-10-26.md`.
+
+### Complemento de animações 1–5 — 26/10/2026
+
+Autorizados e implementados os cinco efeitos propostos: crossfade da galeria, entrada sequencial de cards, indicador deslizante da navbar, resposta ao pressionar botões e ampliação conectada à miniatura. Build, lint e 50 testes de navegador aprovados. A suíte inclui carregamento de captura controlado, cliques rápidos, altura estável, alinhamento do indicador e ausência de animação no modal em reduced motion. Sem novas dependências, commit, push ou deploy. Desempenho em produção permanece pendente; não se atribui nova nota Lighthouse a esta etapa.
+
+### Revisão de documentação e versionamento — 26/10/2026
+
+README atualizado com funcionalidades, setup Windows/Linux, ambiente, currículos, estrutura, testes, publicação e explicação da pasta .github. Gitignore organizado para dependências, builds, relatórios, ambiente local, logs, temporários, arquivos de sistema e chaves. .github, documentação, código, assets públicos, currículos finais, .env.example e lockfile continuam versionáveis. Workflow revisado sem alteração: executa checks em push/PR. Nenhum commit ou push executado.

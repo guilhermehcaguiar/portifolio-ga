@@ -11,7 +11,10 @@ import type { BeyondInterest } from "@/types/portfolio";
  * renderizam — sem mensagens de pendência na UI). Server Component.
  */
 
+import type { Dictionary } from "@/i18n/dictionary";
+
 interface BeyondTheCodeProps {
+  dict: Dictionary;
   interests: BeyondInterest[];
 }
 
@@ -24,6 +27,17 @@ const LUCIDE_STROKE = {
 } as const;
 
 const iconMap: Record<string, ReactNode> = {
+  shield: (
+    <svg
+      className="h-6 w-6 text-accentCyan"
+      viewBox="0 0 24 24"
+      {...LUCIDE_STROKE}
+      aria-hidden="true"
+    >
+      <path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  ),
   "git-branch": (
     <svg
       className="h-6 w-6 text-accentCyan"
@@ -108,34 +122,35 @@ const iconMap: Record<string, ReactNode> = {
   ),
 };
 
-export default function BeyondTheCode({ interests }: BeyondTheCodeProps) {
+export default function BeyondTheCode({ interests, dict }: BeyondTheCodeProps) {
   return (
     <section
       id="beyond-the-code"
       aria-labelledby="beyond-the-code-title"
-      className="scroll-mt-28 border-t border-border py-24 sm:py-32"
+      tabIndex={-1}
+      className="section section-compact"
     >
-      <div className="mx-auto max-w-5xl px-6 sm:px-8">
+      <div className="container">
         <SectionHeading
           id="beyond-the-code"
-          kicker="05"
-          title="Beyond the Code"
-          lede="Interesses e projetos fora do desenvolvimento web tradicional."
+          kicker="04"
+          title={dict.beyond.title}
+          lede={dict.beyond.lede}
         />
 
         {interests.length > 0 && (
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
             {interests.map((interest) => (
               <article
                 key={interest.key}
-                className="rounded-lg border border-border bg-surface p-6"
+                className="border-t border-border pt-5"
               >
                 {iconMap[interest.icon] ?? iconMap.sparkles}
-                <h3 className="mt-4 text-lg font-semibold text-primary">
+                <h3 className="mt-4 text-base font-semibold text-primary">
                   {interest.title}
                 </h3>
                 {interest.description && (
-                  <p className="mt-3 leading-relaxed text-secondary">
+                  <p className="mt-2 text-sm leading-relaxed text-secondary">
                     {interest.description}
                   </p>
                 )}
@@ -147,7 +162,7 @@ export default function BeyondTheCode({ interests }: BeyondTheCodeProps) {
                     className="mt-4 inline-flex text-accentBlue transition-colors hover:text-accentCyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
                   >
                     {interest.link.label}
-                    <span className="sr-only"> (abre em uma nova aba)</span>
+                    <span className="sr-only"> {dict.newTab}</span>
                   </a>
                 )}
               </article>

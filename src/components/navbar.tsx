@@ -1,236 +1,272 @@
 "use client";
+import Link from "next/link";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+} from "react";
+import type { Dictionary } from "@/i18n/dictionary";
+import type { Locale } from "@/i18n/config";
+import { getSectionLinks } from "@/lib/section-links";
 
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+function positionIndicator(container: HTMLDivElement | null) {
+  if (!container) return;
+  const indicator = container.querySelector<HTMLElement>(
+    "[data-nav-indicator]",
+  );
+  const active = container.querySelector<HTMLElement>(
+    'a[aria-current="location"]',
+  );
+  if (!indicator) return;
+  if (!active || !container.getClientRects().length) {
+    indicator.dataset.visible = "false";
+    return;
+  }
+  const vertical = container.dataset.orientation === "vertical";
+  indicator.style.width = `${vertical ? 24 : active.offsetWidth}px`;
+  indicator.style.transform = `translate(${active.offsetLeft + (vertical ? 12 : 0)}px, ${active.offsetTop + active.offsetHeight - 5}px)`;
+  indicator.dataset.visible = "true";
+}
 
-import { sectionLinks } from "@/lib/section-links";
-
-/**
- * Navbar — Etapa A2
- *
- * Navbar fixa com fundo translúcido e blur moderado (identidade GA.),
- * links de navegação por âncora e menu mobile acessível.
- *
- * Pendências documentadas:
- * - Os links apontam para seções que serão criadas na etapa A3
- *   (#sobre, #projetos, #experiencia, #stack, #contato).
- * - O botão Currículo permanece desabilitado até a integração do PDF.
- * - O logo GA. é texto sem link: não há destino real ainda (decisão de
- *   honestidade — nenhum elemento falso apresentado como funcional).
- */
-
-export default function Navbar() {
+export default function Navbar({
+  dict,
+  locale,
+  resume,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+  resume: string | null;
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const navRef = useRef<HTMLElement>(null);
-  const toggleButtonRef = useRef<HTMLButtonElement>(null);
-  const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
-  // P2.1: instrui o efeito a focar o primeiro link apenas quando o menu
-  // for aberto por teclado (Enter/Espaço). Ref, não state — não precisa
-  // re-renderizar e evita set-state-in-effect.
-  const focusOnOpenRef = useRef(false);
-
-  // Ao abrir por teclado: foca o primeiro link (P2.1 — apenas quando a
-  // abertura veio de Enter/Espaço; mouse/toque não teleporta o foco).
-  // Escape: fecha e devolve o foco ao botão de alternância.
-  // Clique fora (P2.2): fecha sem mover o foco. Painel é disclosure
-  // não-modal — focus trap deliberadamente rejeitado (decisão registrada
-  // em docs/arquitetura.md).
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const firstRef = useRef<HTMLAnchorElement>(null);
+  const desktopLinksRef = useRef<HTMLDivElement>(null);
+  const mobileLinksRef = useRef<HTMLDivElement>(null);
+  const focusOnOpen = useRef(false);
+  const links = getSectionLinks(dict);
+  useLayoutEffect(() => {
+    positionIndicator(desktopLinksRef.current);
+    positionIndicator(mobileLinksRef.current);
+  }, [activeSection, menuOpen]);
+  useEffect(() => {
+    if (!("ResizeObserver" in window)) return;
+    const observer = new ResizeObserver(() => {
+      positionIndicator(desktopLinksRef.current);
+      positionIndicator(mobileLinksRef.current);
+    });
+    if (desktopLinksRef.current) observer.observe(desktopLinksRef.current);
+    if (mobileLinksRef.current) observer.observe(mobileLinksRef.current);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    const sections = ["projetos", "sobre", "stack", "contato"]
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const position = scrollY + 140;
+      let current = "";
+      for (const section of sections) {
+        if (section.offsetTop <= position) current = section.id;
+      }
+      if (
+        scrollY > 0 &&
+        innerHeight + scrollY >= document.documentElement.scrollHeight - 4
+      )
+        current = "contato";
+      setActiveSection(current);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    schedule();
+    addEventListener("scroll", schedule, { passive: true });
+    addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      removeEventListener("scroll", schedule);
+      removeEventListener("resize", schedule);
+    };
+  }, []);
   useEffect(() => {
     if (!menuOpen) return;
-
-    if (focusOnOpenRef.current) {
-      firstMobileLinkRef.current?.focus();
-      focusOnOpenRef.current = false;
+    if (focusOnOpen.current) {
+      firstRef.current?.focus();
+      focusOnOpen.current = false;
     }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const keydown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
-        toggleButtonRef.current?.focus();
+        toggleRef.current?.focus();
       }
     };
-
-    const handlePointerDown = (event: PointerEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        setMenuOpen(false);
-      }
+    const pointerdown = (event: PointerEvent) => {
+      if (!navRef.current?.contains(event.target as Node)) setMenuOpen(false);
     };
-
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", keydown);
+    document.addEventListener("pointerdown", pointerdown);
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", keydown);
+      document.removeEventListener("pointerdown", pointerdown);
     };
   }, [menuOpen]);
-
-  // Fecha o menu se a viewport voltar ao breakpoint desktop (md).
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
-    const handleChange = (event: MediaQueryListEvent) => {
+    const media = matchMedia("(min-width: 768px)");
+    const change = (event: MediaQueryListEvent) => {
       if (event.matches) setMenuOpen(false);
     };
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    media.addEventListener("change", change);
+    return () => media.removeEventListener("change", change);
   }, []);
-
-  // P2.1: event.detail === 0 indica ativação por teclado (Enter/Espaço).
-  const toggleMenu = (event: MouseEvent<HTMLButtonElement>) => {
-    if (menuOpen) {
-      closeMenu();
-      return;
-    }
-    focusOnOpenRef.current = event.detail === 0;
-    setMenuOpen(true);
+  const toggle = (event: MouseEvent<HTMLButtonElement>) => {
+    focusOnOpen.current = event.detail === 0;
+    setMenuOpen((open) => !open);
   };
-
-  // Fecha o menu devolvendo o foco ao botão de alternância — usado no
-  // clique de link porque o link deixa o DOM quando o painel fecha.
-  const closeMenu = () => {
+  const navigate = (event: MouseEvent<HTMLAnchorElement>) => {
     setMenuOpen(false);
-    toggleButtonRef.current?.focus();
+    const section = document.querySelector<HTMLElement>(
+      event.currentTarget.hash,
+    );
+    // Transfer focus to the destination after the disclosure closes.
+    requestAnimationFrame(() => {
+      section?.focus({ preventScroll: true });
+    });
   };
-
   return (
     <nav
       ref={navRef}
-      aria-label="Navegação principal"
-      className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md"
+      aria-label={dict.nav.label}
+      className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:px-8">
-        {/* Logo GA. — ponto azul conforme identidade visual */}
-        <span className="text-2xl font-bold tracking-wider">
-          GA<span className="text-accentBlue">.</span>
-        </span>
-
-        {/* Links de navegação (desktop) */}
-        <div className="hidden items-center gap-8 md:flex">
-          {sectionLinks.map((link) => (
+      <div className="container flex h-20 items-center justify-between gap-4">
+        <a
+          href="#inicio"
+          className="brand"
+          aria-label={`GA. — ${dict.footer.top}`}
+        >
+          GA<span>.</span>
+        </a>
+        <div
+          ref={desktopLinksRef}
+          className="desktop-section-links hidden items-center gap-5 text-sm md:flex lg:gap-8"
+        >
+          {links.map((link) => (
             <a
               key={link.key}
               href={link.href}
-              className="py-2 text-secondary transition-colors hover:text-accentBlue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
+              className="nav-link"
+              aria-current={activeSection === link.key ? "location" : undefined}
             >
               {link.label}
             </a>
           ))}
+          <span
+            data-nav-indicator
+            className="nav-indicator"
+            aria-hidden="true"
+          />
         </div>
-
-        {/* Lado direito: Currículo (desktop) + hambúrguer (mobile) */}
-        <div className="flex items-center gap-4">
-          {/* Botão Currículo — desabilitado até a integração do PDF */}
-          <button
-            type="button"
-            disabled
-            title="Currículo em PDF — integração pendente"
-            className="hidden items-center gap-2 rounded border border-border px-4 py-2 font-medium text-secondary disabled:cursor-not-allowed disabled:opacity-50 md:inline-flex"
+        <div className="flex items-center gap-3">
+          <div
+            aria-label={dict.nav.language}
+            className="flex items-center rounded-full border border-border p-1 text-xs font-medium"
           >
-            Currículo
-            <span className="sr-only">(disponível em breve)</span>
+            <Link
+              href="/"
+              prefetch={false}
+              hrefLang="pt-BR"
+              lang="pt-BR"
+              aria-label="PT — Português (Brasil)"
+              aria-current={locale === "pt-BR" ? "page" : undefined}
+              className={`language-link ${locale === "pt-BR" ? "active" : ""}`}
+            >
+              PT
+            </Link>
+            <Link
+              href="/en"
+              prefetch={false}
+              hrefLang="en"
+              lang="en"
+              aria-label="EN — English"
+              aria-current={locale === "en" ? "page" : undefined}
+              className={`language-link ${locale === "en" ? "active" : ""}`}
+            >
+              EN
+            </Link>
+          </div>
+          {resume && (
+            <a
+              href={resume}
+              download
+              className="button button-secondary resume-desktop"
+            >
+              {dict.nav.resume} ↓
+            </a>
+          )}
+          <button
+            ref={toggleRef}
+            type="button"
+            aria-controls="mobile-menu"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? dict.nav.close : dict.nav.open}
+            onClick={toggle}
+            className="flex h-11 w-11 items-center justify-center rounded-md text-primary md:hidden"
+          >
             <svg
-              className="h-4 w-4"
+              width="24"
+              height="24"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              strokeWidth="1.5"
               aria-hidden="true"
             >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="3" x2="12" y2="15" />
+              {menuOpen ? (
+                <path d="m6 6 12 12M6 18 18 6" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
             </svg>
-          </button>
-
-          {/* Botão de alternância do menu mobile */}
-          <button
-            ref={toggleButtonRef}
-            type="button"
-            onClick={toggleMenu}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            aria-label={
-              menuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"
-            }
-            className="p-2 text-accentBlue transition-colors hover:text-accentCyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue md:hidden"
-          >
-            {menuOpen ? (
-              <svg
-                className="h-6 w-6"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            ) : (
-              <svg
-                className="h-6 w-6"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </svg>
-            )}
           </button>
         </div>
       </div>
-
-      {/* Painel do menu mobile (padrão disclosure, sob a barra) */}
       <div
         id="mobile-menu"
         hidden={!menuOpen}
-        className="border-t border-border bg-background/95 backdrop-blur-md md:hidden"
+        className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-border bg-background md:hidden"
       >
-        <div className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-6 sm:px-8">
-          {sectionLinks.map((link, index) => (
+        <div
+          ref={mobileLinksRef}
+          data-orientation="vertical"
+          className="mobile-section-links container flex flex-col py-5"
+        >
+          {links.map((link, index) => (
             <a
               key={link.key}
+              ref={index === 0 ? firstRef : undefined}
               href={link.href}
-              ref={index === 0 ? firstMobileLinkRef : undefined}
-              onClick={closeMenu}
-              className="rounded px-3 py-3 text-xl font-medium text-secondary transition-colors hover:text-accentBlue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
+              onClick={navigate}
+              aria-current={activeSection === link.key ? "location" : undefined}
+              className="nav-link rounded px-3 py-3 text-lg"
             >
               {link.label}
             </a>
           ))}
-
-          {/* Currículo no menu mobile — desabilitado até a integração do PDF */}
-          <button
-            type="button"
-            disabled
-            title="Currículo em PDF — integração pendente"
-            className="mt-4 inline-flex items-center justify-center gap-2 rounded border border-border px-4 py-3 font-medium text-secondary disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            Currículo
-            <span className="sr-only">(disponível em breve)</span>
-            <svg
-              className="h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-          </button>
+          <span
+            data-nav-indicator
+            className="nav-indicator"
+            aria-hidden="true"
+          />
+          {resume && (
+            <a href={resume} download className="button button-secondary mt-3">
+              {dict.nav.resume} ↓
+            </a>
+          )}
         </div>
       </div>
     </nav>

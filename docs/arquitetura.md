@@ -1,67 +1,74 @@
-# Arquitetura do Projeto portifolio-ga
+# Arquitetura — portifolio-ga
 
-## Stack Verificada
-| Camada | Tecnologia | Versão | Observação |
-|--------|------------|--------|-----------|
-| Framework | Next.js | 16.4.0 | App Router ativo (Turbopack, `cacheComponents`) |
-| View Layer | React | 19.3.0 | Compatível com TS 5.x |
-| Language | TypeScript | 5.x | Tipagem em todo código |
-| Styling | Tailwind CSS | 4.0 | Configurado via `@import "tailwindcss"` + `@theme inline` |
-| Fontes | Geist + Geist Mono | Google Fonts | Variáveis CSS em `layout.tsx` |
-| Estrutura | App Router | Next.js 16 | Diretório `src/app/` |
+## Stack
 
-## Estrutura de Diretórios (real — pós A3)
-```
-src/
-├── app/
-│   ├── layout.tsx          ← Raiz (lang pt-BR, fontes, meta global)
-│   ├── page.tsx            ← Composição: Hero + 6 seções + Footer
-│   ├── globals.css         ← Tokens da paleta GA., @import tailwind, @theme inline
-│   └── favicon.ico
-├── components/
-│   ├── navbar.tsx          ← Fixa (h-20), menu mobile disclosure (único client component)
-│   ├── hero.tsx            ← Hero com CTAs hierarquizados (server component)
-│   ├── section-heading.tsx ← Kicker numerado + h2 + lede opcional (compartilhado)
-│   ├── sobre.tsx
-│   ├── projetos.tsx        ← Destaque + grid + accordion nativo <details>
-│   ├── experiencia.tsx
-│   ├── stack.tsx
-│   ├── beyond-the-code.tsx
-│   ├── contato.tsx         ← Cards-link com canais verificados
-│   └── footer.tsx          ← Logo GA., âncoras das seções, © 2026
-├── types/
-│   └── portfolio.ts        ← AboutData, ExperienceItem, ProjectLink, Project (deployUrl/repositoryUrl), ProjectsData, StackCategory, BeyondInterest, ContactChannel, PersonData, HeroData
-├── lib/
-│   └── section-links.ts    ← Links de seção compartilhados (navbar + footer)
-└── data/
-    └── portfolio.ts        ← Camada centralizada de dados (única fonte de conteúdo)
-```
+Next.js 16.4.3, React 19.3.0, TypeScript, Tailwind CSS 4, Geist/Geist Mono e Simple Icons. Playwright é dependência de desenvolvimento para checks de navegador. Node.js 22 é a versão de referência da CI. Use `npm ci` para reproduzir o lockfile.
 
-## Convenções
-- **Componentes:** Arquivos `.tsx` em `src/components/`, export default; Server Components por padrão (apenas `navbar.tsx` é client)
-- **Camada de dados:** Todo dado pessoal/profissional vive em `src/data/portfolio.ts` (interfaces em `src/types/portfolio.ts`), consumido via props; campos pendentes = `null` + comentário `PENDÊNCIA`; textos fixos de interface podem permanecer nos componentes
-- **Links:** `href: null` nunca renderiza como clicável; links externos com `target="_blank"`, `rel="noopener noreferrer"` e dica `sr-only` de nova aba
-- **Tailwind:** Tokens da identidade em `globals.css` via `:root` e `@theme inline` (gera utilitários com variantes)
-- **Seções:** casca padrão `scroll-mt-28 border-t border-border py-24 sm:py-32` + container `mx-auto max-w-5xl px-6 sm:px-8` + `SectionHeading` com kickers numerados fixos (01 Sobre, 02 Projetos, 03 Experiência, 04 Stack, 05 Beyond the Code, 06 Contato)
-- **Ícones:** Lucide inline SVG para interface (sem dependências), mapa por nome + fallback; tecnologias da Stack usam logos oficiais via **Simple Icons** (fill currentColor, monocromático, server-rendered); conceitos sem marca usam Lucide no mesmo tamanho/cor
-- **Cards de projeto (A5):** regra de destino `deployUrl > repositoryUrl > não clicável` (sem links falsos); overlay/stretched link para o card inteiro (sem `<a>` aninhado); ação GitHub secundária (`z-10`) quando há deploy; indicador discreto do destino; `<summary>` dos secundários é apenas toggle — a ação fica no painel
-- **Acessibilidade:** foco visível `focus-visible:outline-accentBlue`, `aria-labelledby` por seção, accordion nativo `<details>/<summary>`, um único h1 (Hero) e um h2 por seção, skip-link "Pular para o conteúdo" (`#conteudo`), dicas `sr-only` em links externos, `motion-reduce` apenas no chevron (transições de cor preservadas)
-- **SEO/Metadata:** Metadata API em `layout.tsx` (Open Graph, Twitter, robots, themeColor); JSON-LD `Person` consumindo a camada de dados; campos dependentes de domínio (canonical, og:url, OG image, schema WebSite) ficam para a A5
-- **Metadados:** `metadata` em `layout.tsx`, título/description por página quando necessário
-- **Responsividade:** mobile-first; navbar mobile até `md` (768px)
-- **Tipagem:** TypeScript em todos os arquivos; evitar `any` quando possível
+Next.js e eslint-config-next passaram de 16.4.0 para 16.4.3 em 26/10/2026 para corrigir vulnerabilidades reportadas pelo npm audit, não apenas por atualização de versão. A dependência transitiva Zod também recebeu correção compatível. O audit terminou sem vulnerabilidades conhecidas.
 
-## Decisões Técnicas Consolidadas
-1. **A1 concluída:** Fundação técnica (Next.js, React, TS, Tailwind, fontes, tokens) — status: ✅
-2. **A2 concluída:** Navbar + Hero, incluindo correções P1 (contraste do CTA primário, breakpoint `md` da navbar) — status: ✅
-3. **A3 concluída:** 6 seções + footer com camada centralizada de dados (A3.1–A3.5) — status: ✅; conteúdo definitivo pendente por decisão (ver `docs/roadmap.md`)
-4. **Sem alterações de dependências:** Versões já instaladas não serão mudadas apenas por serem "mais recentes"
-5. **Docs persistentes:** Criadas para acompanhar o projeto entre sistemas operacionais
-6. **Git:** Nenhum agente executa `git add`, `git commit`, `git push` sem autorização explícita do usuário
-7. **Deploy futuro:** Vercel, somente quando autorizado pelo usuário (A5)
-8. **Duplicações unificadas na A5:** links de seção agora vivem em `src/lib/section-links.ts` (navbar + footer consomem a mesma fonte, fora da camada de dados para não puxá-la ao bundle client); URL do GitHub centralizada em `githubProfileUrl` (`src/data/portfolio.ts` — Hero, Footer, contato e `person.sameAs`); conteúdo profissional do Hero centralizado (`HeroData`)
-9. **Currículo:** botão da navbar desabilitado até a integração do PDF
-10. **A4 concluída:** SEO + acessibilidade — metadata estendida, JSON-LD Person (jobTitle "Software Developer", nomenclatura consolidada no site), skip-link, clique-fora no menu, foco no primeiro link apenas quando aberto por teclado, tipo dos secundários visível em mobile, `motion-reduce` no chevron — status: ✅
-11. **Focus trap rejeitado** para o menu mobile: painel é disclosure não-modal ancorado na navbar; clique-fora + Escape cobrem os casos reais sem complexidade extra
-12. **A5 concluída (sem deploy):** cards clicáveis, Stack com ícones (única dependência nova: `simple-icons`), unificações (item 8), limpeza comprovada do `globals.css` (bloco dark duplicado e `btn-*` removidos), touch targets `py-2` — status: ✅; **A5b** (metadataBase, canonical, og:url/og:image, schema WebSite, sitemap, Lighthouse, deploy Vercel) aguarda domínio real
-13. **Regra de destino dos cards:** `deployUrl > repositoryUrl > não clicável`; Alambrado permanece não clicável até URL verificada (nenhum link falso)
+## Rotas e documento
+
+- `/`: `src/app/(pt-BR)/page.tsx` e layout raiz em português.
+- `/en`: `src/app/(en)/en/page.tsx` e layout raiz inglês.
+- Não há `src/app/layout.tsx` ou `src/app/page.tsx` concorrendo com os grupos.
+- Os layouts importam `PortfolioDocument`: um único html/body/main por documento, lang correto, fontes, skip-link, Navbar, Footer e JSON-LD Person.
+- `HomeContent` compõe os mesmos componentes nos dois idiomas: Hero → Projetos → Sobre → Stack → Interesses → Contato.
+- Cada layout é uma raiz; trocar de idioma pode carregar um novo documento. IDs e âncoras permanecem iguais nos dois idiomas.
+
+## Conteúdo e traduções
+
+Fatos, URLs e textos pessoais vivem em `src/data/portfolio.ts`. `getPortfolio(locale)` retorna os textos do idioma preservando os dados comuns. `ProjectKey` define os sete IDs de projeto; `Record<ProjectKey, ProjectCopy>` exige tradução para todos eles. Tecnologias adicionais da migração incompleta não foram assumidas como habilidades confirmadas.
+
+`src/i18n/dictionary.ts` exige os mesmos rótulos de interface em PT/EN. `src/lib/section-links.ts` constrói links a partir do dicionário; não existe link público para experiência vazia. A seção antiga de experiência permanece disponível para futura integração com dados reais.
+
+## Componentes e acessibilidade
+
+Server Components por padrão. Navbar é cliente para o disclosure mobile e indicador de seção ativa; ProjectGallery gerencia galeria/ampliação; MotionEnhancements aplica entradas progressivas via IntersectionObserver. Menu com Enter/Espaço, Escape, clique fora e fechamento ao passar para desktop. Ao escolher uma seção no mobile, o foco vai para o destino, que recebe tabindex=-1. Não há focus trap, pois não é modal.
+
+Um h1 por página, headings por seção, IDs únicos, foco visível, skip-link, offsets para navbar fixa, accordion nativo e rótulos de nova aba traduzidos. mailto não abre nova aba. Respeito a prefers-reduced-motion. CTAs usam branco sobre blue-600; links de texto usam azul claro/ciano com contraste sobre o fundo escuro. Validação por navegador não equivale a certificação WCAG completa.
+
+Cards usam ações explícitas para site e GitHub; a imagem do destaque é um botão acessível para ampliar a captura em um dialog nativo. Isso facilita selecionar texto e distinguir demonstração de repositório. Secundários usam details/summary. Nenhuma URL pendente gera link falso.
+
+## Arquivos estáticos e currículo
+
+- `public/projetos/alambrado.webp`: captura real do site público, autorizada no contexto da revisão pelo autor. Servida via next/image com sizes responsivo e lazy loading.
+- `public/curriculos/`: PDFs `guilherme-aguiar-pt-br.pdf` e `guilherme-aguiar-en.pdf`.
+- `src/lib/resume.ts`: detecta o PDF do idioma no servidor durante a renderização estática. Links de download aparecem na navbar/contato somente quando ele existe. Rebuild/restart necessário ao adicionar PDFs.
+- `public/og.png`: imagem social 1200×630, gerada por `scripts/generate-social-image.mjs` a partir de SVG; não é uma imagem de projeto fabricada.
+- `src/app/icon.svg`: favicon GA.; favicon do template removido.
+
+## SEO
+
+`src/lib/metadata.ts` gera title, description, Open Graph e Twitter por idioma. JSON-LD Person usa nome, atuação, e-mail e perfis confirmados.
+
+A variável `SITE_URL` deve ser a origem pública confirmada do PORTFÓLIO. Quando definida antes do build, habilita metadataBase, canonical, hreflang recíproco, og:url, imagem social e URLs no sitemap. Sem domínio, o sitemap fica vazio e não são inventadas URLs. `robots.ts` permite crawling e anuncia o sitemap somente com domínio configurado. `.env.example` está versionável.
+
+## Qualidade e publicação
+
+Checks: `npm run lint`, `npm run build`, `npm run typecheck`, `npm run test:e2e`. Os testes de produção em Chromium cobrem os dois idiomas em 320/375/768/1024/1440 px, conteúdo, imagem, teclado, seleção de idioma e integridade estrutural. Workflow `.github/workflows/quality.yml` executa os checks em push/PR.
+
+Nenhum agente realiza commit, push ou deploy automaticamente. Publicação e dados de experiência continuam pendentes. Consultar roadmap para a evidência final desta revisão.
+
+## Posicionamento de conteúdo atualizado
+
+Apresentação profissional: Software Developer / Desenvolvedor de Software. A maior parte dos projetos atuais é em front-end, muito por influência da faculdade; isso descreve o volume atual de projetos. Estudos em aprofundamento: front-end com React, Java e Python, mantendo interesse e estudo em outras áreas da computação. Interesses confirmados: Machine Learning e cibersegurança; exploração adicional de hardware e automação. O card de Sobre se chama Estudos e interesses atuais para distinguir estudo/interesse de experiência comprovada. Esses interesses aparecem também em Explorando e nos cards de interesses, sem sugerir especialização ou atuação profissional não confirmada.
+
+## Galeria, navegação e movimento — revisão autorizada
+
+- `ProjectGallery` recebe as três capturas reais (início, catálogo e carrinho vazio) e rótulos traduzidos. A prévia mantém a captura exibida enquanto a próxima carrega e sobrepõe temporariamente as duas durante o fade. A versão ampliada é renderizada somente ao abrir o dialog nativo.
+- Ampliação via botão com aria-haspopup=dialog; fechamento por botão, Escape e backdrop; foco retorna ao acionador. Rolagem do body é bloqueada apenas enquanto aberto e restaurada no fechamento/unmount. O dialog nativo fornece modalidade; um ciclo explícito de Tab/Shift+Tab mantém o foco nos controles internos.
+- `Navbar` atualiza aria-current=location ao rolar, usando listener passivo e requestAnimationFrame; recalcula as posições das seções, inclusive após expansão de projetos. PT/EN continuam sem prefetch entre layouts raiz.
+- `MotionEnhancements` observa títulos e cards abaixo da primeira viewport, aplica uma entrada de 360 ms uma única vez e desconecta o observer no unmount. Não deixa conteúdo oculto aguardando JavaScript.
+- Hero usa sequência CSS curta; cards com links respondem com elevação apenas em dispositivos com hover/ponteiro preciso; setas respondem também ao foco por teclado.
+- Menu usa transição discreta de display quando suportada. Accordion permanece details/summary, com interpolação de tamanho em navegadores compatíveis e fallback nativo nos demais.
+- prefers-reduced-motion desativa animações e transições, incluindo pseudo-elementos, dialog/backdrop e movimento no hover. Nenhuma biblioteca de animação foi adicionada.
+
+## Complemento: cinco efeitos de interação
+
+1. A galeria separa captura solicitada de captura exibida. Mantém a imagem anterior até o onLoad da próxima e faz crossfade de 200 ms via Web Animations API. Área com aspect-ratio fixa; cliques rápidos cancelam a transição anterior e somente o último pedido pode concluir. Falha de carregamento preserva a captura anterior.
+2. IntersectionObserver distribui atrasos de 60 ms entre cards irmãos que entram juntos na viewport, limitados a 180 ms. Cada card entra uma vez; foco por teclado elimina espera visual. Conteúdo continua visível sem JavaScript.
+3. A navbar usa um indicador decorativo compartilhado em cada conjunto de links, com transição de posição/largura de 220 ms. useLayoutEffect e ResizeObserver alinham o indicador ao link ativo no desktop e no menu mobile. aria-current continua sendo o estado acessível.
+4. Controles recebem compressão de 3% em :active, com transição curta. O efeito é desativado com movimento reduzido.
+5. O dialog usa os limites da miniatura e do modal para interpolar posição e escala na abertura (260 ms) e retorno (200 ms). Escape, backdrop e botão compartilham o fechamento; cliques repetidos são protegidos. Ativar movimento reduzido durante uma animação a finaliza imediatamente. Sem Element.animate, as operações são instantâneas.
+
+Nenhuma dependência ou biblioteca de animação foi adicionada.

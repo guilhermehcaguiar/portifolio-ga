@@ -1,53 +1,31 @@
-import { githubProfileUrl } from "@/data/portfolio";
-import { sectionLinks } from "@/lib/section-links";
-
-/**
- * Footer — Etapas A3.4/A5
- *
- * Encerramento visual: logo GA. com ponto azul (sem link — sem destino
- * real), âncoras das seções (unificadas com a navbar via
- * @/lib/section-links), © 2026 (ano estático, sem risco de hidratação),
- * nota factual das tecnologias e link real para o GitHub
- * (githubProfileUrl — única fonte da URL). Server Component, sem props.
- */
-
-export default function Footer() {
+import type { Dictionary } from "@/i18n/dictionary";
+import { getSectionLinks } from "@/lib/section-links";
+export default function Footer({ dict }: { dict: Dictionary }) {
   return (
-    <footer className="border-t border-border py-12">
-      <div className="mx-auto max-w-5xl px-6 sm:px-8">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-          <span className="text-2xl font-bold tracking-wider">
-            GA<span className="text-accentBlue">.</span>
-          </span>
-
-          <nav aria-label="Seções do site">
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
-              {sectionLinks.map((link) => (
-                <li key={link.key}>
-                  <a
-                    href={link.href}
-                    className="inline-flex items-center py-2 text-secondary transition-colors hover:text-accentBlue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+    <footer className="border-t border-border py-9">
+      <div className="container">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <a
+            className="brand"
+            href="#inicio"
+            aria-label={`GA. — ${dict.footer.top}`}
+          >
+            GA<span>.</span>
+          </a>
+          <nav
+            aria-label={dict.footer.label}
+            className="flex flex-wrap gap-x-6"
+          >
+            {getSectionLinks(dict).map((link) => (
+              <a key={link.key} href={link.href} className="nav-link text-sm">
+                {link.label}
+              </a>
+            ))}
           </nav>
         </div>
-
-        <div className="mt-8 flex flex-col gap-2 border-t border-border pt-8 text-sm text-secondary sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-6 flex flex-col gap-3 border-t border-border pt-6 text-xs leading-relaxed text-secondary sm:flex-row sm:justify-between">
           <p>© 2026 Guilherme Aguiar</p>
-          <p>Feito com Next.js, React e Tailwind CSS</p>
-          <a
-            href={githubProfileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accentBlue transition-colors hover:text-accentCyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
-          >
-            GitHub
-            <span className="sr-only"> (abre em uma nova aba)</span>
-          </a>
+          <p>{dict.footer.built}</p>
         </div>
       </div>
     </footer>

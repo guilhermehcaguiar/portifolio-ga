@@ -16,8 +16,17 @@ export interface ProjectLink {
   href: string | null; // null = pendente → NÃO renderiza como clicável
 }
 
+export type ProjectKey =
+  | "alambrado"
+  | "autoshop-payables"
+  | "autofilter-search"
+  | "vetcare"
+  | "translog"
+  | "forma-store"
+  | "orbit";
+
 export interface Project {
-  key: string;
+  key: ProjectKey;
   name: string;
   type: string | null;
   description: string | null;
@@ -26,6 +35,11 @@ export interface Project {
   isAcademic: boolean; // projeto acadêmico → exibe tag discreta "Acadêmico" (não inferir por type/descrição)
   deployUrl: string | null; // site público ativo — destino principal do card (A5)
   repositoryUrl: string | null; // repositório GitHub verificado
+  context?: string;
+  contribution?: string;
+  result?: string;
+  image?: string;
+  imageAlt?: string;
 }
 
 export interface ProjectsData {

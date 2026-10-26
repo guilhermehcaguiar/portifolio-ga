@@ -1,7 +1,5 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
+# Dependências instaladas
+/node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -10,32 +8,52 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
-# next.js
+# Builds e caches gerados
 /.next/
 /out/
+/build/
+/dist/
+*.tsbuildinfo
+/next-env.d.ts
 
-# production
-/build
+# Resultados de testes e Playwright
+/coverage/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
 
-# misc
-.DS_Store
-*.pem
+# Ambiente local; manter somente o modelo público
+.env*
+!.env.example
 
-# debug
+# Configuração local da hospedagem
+/.vercel/
+
+# Logs de execução
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# Temporários locais
+/.tmp/
+/tmp/
+*.swp
+*.swo
+*~
 
-# vercel
-.vercel
+# Arquivos do sistema (macOS e Windows)
+.DS_Store
+Thumbs.db
+Desktop.ini
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Chaves e certificados locais
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Versionar .github/, docs/, public/, testes, scripts e package-lock.json.
+# PDFs finais do currículo em public/curriculos/ também são arquivos públicos.
