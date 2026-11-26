@@ -2,6 +2,7 @@ import type { ContactChannel } from "@/types/portfolio";
 import type { Dictionary } from "@/i18n/dictionary";
 import { email } from "@/data/portfolio";
 import SectionHeading from "./section-heading";
+import ActionArrow from "./action-arrow";
 export default function Contato({
   channels,
   dict,
@@ -28,11 +29,11 @@ export default function Contato({
             />
             <div className="mt-7 flex flex-wrap gap-3">
               <a href={`mailto:${email}`} className="button button-primary">
-                {dict.contact.email} <span aria-hidden="true">↗</span>
+                {dict.contact.email} <ActionArrow />
               </a>
               {resume && (
                 <a href={resume} download className="button button-secondary">
-                  {dict.contact.resume} <span aria-hidden="true">↓</span>
+                  {dict.contact.resume} <ActionArrow direction="down" />
                 </a>
               )}
             </div>
@@ -59,7 +60,7 @@ export default function Contato({
                         {channel.handle}
                       </span>
                     </span>
-                    <span aria-hidden="true" className="shrink-0 text-accentCyan">↗</span>
+                    <ActionArrow />
                     {external && <span className="sr-only">{dict.newTab}</span>}
                   </a>
                 );

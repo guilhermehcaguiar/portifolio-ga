@@ -673,13 +673,24 @@ html {
     border-color 180ms ease,
     transform 180ms ease;
 }
-.button > span[aria-hidden],
-.project-link > span[aria-hidden] {
-  display: inline-block;
+.action-arrow {
+  flex-shrink: 0;
   transition: transform 180ms ease;
 }
-:is(.button, .project-link):is(:hover, :focus-visible) > span[aria-hidden] {
-  transform: translate(2px, -2px);
+.contact-link > .action-arrow {
+  color: var(--accentCyan);
+}
+.action-arrow[data-direction="down-right"] {
+  --arrow-y: 2px;
+}
+.action-arrow[data-direction="down"] {
+  --arrow-x: 0px;
+  --arrow-y: 2px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :is(.button, .project-link):is(:hover, :focus-visible) > .action-arrow {
+    transform: translate(var(--arrow-x, 2px), var(--arrow-y, -2px));
+  }
 }
 .nav-link {
   position: relative;

@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Dictionary } from "@/i18n/dictionary";
 import { hero } from "@/data/portfolio";
 import type { Project } from "@/types/portfolio";
+import ActionArrow from "./action-arrow";
 export default function Hero({
   dict,
   featured,
@@ -41,10 +42,10 @@ export default function Hero({
           </p>
           <div data-hero-step="4" className="mt-6 flex flex-wrap gap-3">
             <a href="#projetos" className="button button-primary">
-              {dict.hero.projects} <span aria-hidden="true">↘</span>
+              {dict.hero.projects} <ActionArrow direction="down-right" />
             </a>
             <a href="#contato" className="button button-secondary">
-              {dict.hero.contact} <span aria-hidden="true">↓</span>
+              {dict.hero.contact} <ActionArrow direction="down" />
             </a>
           </div>
         </div>
@@ -55,7 +56,9 @@ export default function Hero({
                 <p className="eyebrow">{dict.projects.featured}</p>
                 <p className="mt-1 text-2xl font-semibold tracking-tight">{featured.name}</p>
               </div>
-              <span aria-hidden="true" className="hero-preview-arrow">↘</span>
+              <span className="hero-preview-arrow">
+                <ActionArrow direction="down-right" />
+              </span>
             </div>
             <div className="hero-preview-media">
               <Image

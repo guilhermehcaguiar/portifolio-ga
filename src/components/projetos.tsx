@@ -3,6 +3,7 @@ import ProjectGallery from "./project-gallery";
 import type { Dictionary } from "@/i18n/dictionary";
 import type { ProjectsData, Project } from "@/types/portfolio";
 import SectionHeading from "./section-heading";
+import ActionArrow from "./action-arrow";
 function Technologies({ project, label }: { project: Project; label: string }) {
   return project.technologies.length > 0 ? (
     <ul className="flex flex-col items-start gap-1.5" aria-label={label}>
@@ -25,7 +26,7 @@ function Actions({ project, dict }: { project: Project; dict: Dictionary }) {
           className="button button-primary"
         >
           {dict.projects.website}
-          <span aria-hidden="true"> ↗</span>
+          <ActionArrow />
           <span className="sr-only">
             {" "}
             — {project.name}
@@ -43,7 +44,7 @@ function Actions({ project, dict }: { project: Project; dict: Dictionary }) {
           }
         >
           {dict.projects.repository}
-          <span aria-hidden="true"> ↗</span>
+          <ActionArrow />
           <span className="sr-only">
             {" "}
             — {project.name}

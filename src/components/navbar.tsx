@@ -10,6 +10,7 @@ import {
 import type { Dictionary } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/config";
 import { getSectionLinks } from "@/lib/section-links";
+import ActionArrow from "./action-arrow";
 
 function positionIndicator(container: HTMLDivElement | null) {
   if (!container) return;
@@ -205,7 +206,7 @@ export default function Navbar({
               download
               className="button button-secondary resume-desktop"
             >
-              {dict.nav.resume} ↓
+              {dict.nav.resume} <ActionArrow direction="down" />
             </a>
           )}
           <button
@@ -264,7 +265,7 @@ export default function Navbar({
           />
           {resume && (
             <a href={resume} download className="button button-secondary mt-3">
-              {dict.nav.resume} ↓
+              {dict.nav.resume} <ActionArrow direction="down" />
             </a>
           )}
         </div>
