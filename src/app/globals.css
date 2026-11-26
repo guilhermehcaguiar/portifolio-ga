@@ -286,12 +286,12 @@ summary {
 .featured-case-details {
   display: grid;
 }
-.featured-case-copy,
-.featured-case-details {
-  padding: clamp(18px, 3vw, 38px);
-}
 .featured-case-copy {
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  padding: clamp(18px, 2.5vw, 28px);
   background: radial-gradient(ellipse at top left, #1b345b87, transparent 74%);
   border-start-start-radius: 20px;
 }
@@ -300,7 +300,8 @@ summary {
   border-inline-start: 2px solid #4984e4;
 }
 .featured-case-details {
-  gap: 24px;
+  gap: 16px;
+  padding: clamp(16px, 2vw, 24px);
   border-top: 1px solid var(--border);
   background: #0e1521;
   border-end-start-radius: 20px;
@@ -308,6 +309,16 @@ summary {
 }
 .case-featured dl {
   margin-top: 0;
+  gap: 14px;
+}
+.featured-case-details ul {
+  gap: 2px;
+}
+.featured-case-details .chip {
+  padding: 0;
+  border: 0;
+  font-size: 12px;
+  line-height: 1.45;
 }
 .project-spotlight {
   display: grid;
@@ -433,10 +444,12 @@ summary {
 }
 @media (min-width: 768px) {
   .hero-layout,
-  .featured-case-grid,
   .project-spotlight {
     grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
     align-items: center;
+  }
+  .featured-case-grid {
+    grid-template-columns: minmax(0, 1.36fr) minmax(0, 1fr);
   }
   .project-spotlight {
     grid-template-areas:
@@ -456,7 +469,7 @@ summary {
 @media (min-width: 1024px) {
   .case-featured dl {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
+    gap: 24px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -477,13 +490,15 @@ html {
   flex-direction: column;
   justify-content: center;
   min-width: 0;
-  padding: clamp(15px, 2.5vw, 28px);
+  padding: clamp(12px, 2vw, 20px);
   background: var(--surface);
   border-start-end-radius: 20px;
 }
 .project-gallery {
   width: 100%;
   min-width: 0;
+  max-width: 416px;
+  margin-inline: auto;
 }
 @media (max-width: 767px) {
   .project-preview-column {
@@ -498,7 +513,7 @@ html {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   color: var(--secondary);
   font-family: var(--font-geist-mono), monospace;
   font-size: 11px;
@@ -541,7 +556,7 @@ html {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: 10px;
 }
 .gallery-choices button {
   min-height: 44px;

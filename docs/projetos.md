@@ -34,7 +34,7 @@ Plataforma educacional sobre uso responsável de IA, criada em equipe como proje
 
 ## Projetos Secundários (compactos)
 - **VetCare** — sistema veterinário (informações confirmadas, consulta separada)
-- **TransLog** — sistema de logística
+- **TransLog** — sistema de logística acadêmico. [Site publicado](https://translogbr.vercel.app/) e [repositório](https://github.com/arthurniceass-jpg/translog).
 - **FORMA Store** — loja institucional
 - **Orbit** — Sistema Integrado Estudantil
 
@@ -65,3 +65,20 @@ Plataforma educacional sobre uso responsável de IA, criada em equipe como proje
 ### Galeria do Alambrado
 
 Além da captura inicial, foram adicionadas `public/projetos/alambrado-catalogo.webp` e `public/projetos/alambrado-carrinho.webp`, obtidas das páginas públicas em 26/10/2026. Carrinho registrado no estado vazio; nenhuma compra, envio de WhatsApp ou inserção de dados pessoais foi executada. Galeria PT/EN com ampliação acessível.
+
+## Revisão das tecnologias por repositório
+
+A revisão consultou a branch padrão dos oito projetos. Os cartões mostram as tecnologias centrais. Os arquivos abaixo permitem conferir a composição de cada aplicação, incluindo ferramentas e integrações que não precisam ocupar espaço no cartão.
+
+| Projeto | Tecnologias e evidências |
+|---|---|
+| **Alambrado** | Next.js com App Router, React, TypeScript, Tailwind CSS e Supabase para o banco e as imagens. Hospedagem na Vercel. [Manifesto](https://github.com/guilhermehcaguiar/alambrado/blob/main/package.json) · [README](https://github.com/guilhermehcaguiar/alambrado/blob/main/README.md) |
+| **AutoShop Payables** | React, Vite e Tailwind CSS na interface. Python, FastAPI, SQLAlchemy e PostgreSQL no servidor. O README ainda menciona SQLite. A lista do cartão segue o código de conexão e o driver PostgreSQL declarados na branch atual. [Interface](https://github.com/guilhermehcaguiar/AutoShop-Payables/blob/main/frontend/package.json) · [Conexão](https://github.com/guilhermehcaguiar/AutoShop-Payables/blob/main/backend/database.py) · [Dependências](https://github.com/guilhermehcaguiar/AutoShop-Payables/blob/main/backend/requirements.txt) |
+| **AutoFilter Search** | Python, Streamlit e pandas. Os catálogos são arquivos CSV consultados localmente. [Dependências](https://github.com/guilhermehcaguiar/AutoFilter-Search/blob/main/requirements.txt) · [README](https://github.com/guilhermehcaguiar/AutoFilter-Search/blob/main/README.md) |
+| **Beyond the Prompt** | Next.js com exportação estática, React, TypeScript, Tailwind CSS e ícones Lucide. [Manifesto](https://github.com/guilhermehcaguiar/beyondtheprompt/blob/main/package.json) · [Configuração](https://github.com/guilhermehcaguiar/beyondtheprompt/blob/main/next.config.ts) |
+| **VetCare** | React, Vite, React Router, Tailwind CSS e Axios na interface. Python, Django, Django REST Framework e SQLite no servidor. [Interface](https://github.com/guilhermehcaguiar/VetCare/blob/main/frontend/package.json) · [Dependências](https://github.com/guilhermehcaguiar/VetCare/blob/main/backend/requirements.txt) · [README](https://github.com/guilhermehcaguiar/VetCare/blob/main/README.md) |
+| **TransLog** | React, JavaScript, Vite, React Router e CSS na interface. Java 21, Spring Boot, Spring Security, Spring Data JPA e Flyway na API. H2 para desenvolvimento e PostgreSQL em produção, conforme o README. Frontend na Vercel e API configurada para o Render. [Interface](https://github.com/arthurniceass-jpg/translog/blob/main/frontend/package.json) · [API](https://github.com/arthurniceass-jpg/translog/blob/main/backend/pom.xml) · [README](https://github.com/arthurniceass-jpg/translog/blob/main/README.md) |
+| **FORMA Store** | React, JavaScript, Vite, React Router e CSS na interface. Node.js, Express e PostgreSQL na API. O repositório documenta as integrações de pagamento e frete em ambiente de teste e a homologação pendente. [Interface](https://github.com/guilhermehcaguiar/forma-store/blob/main/package.json) · [API](https://github.com/guilhermehcaguiar/forma-store/blob/main/server/package.json) · [README](https://github.com/guilhermehcaguiar/forma-store/blob/main/README.md) |
+| **Orbit** | TypeScript, Next.js, React e Tailwind CSS no app web. NestJS com Fastify, PostgreSQL e Drizzle ORM na API. O monorepo usa npm workspaces e Turborepo. [Web](https://github.com/guilhermehcaguiar/orbit/blob/main/apps/web/package.json) · [API](https://github.com/guilhermehcaguiar/orbit/blob/main/apps/api/package.json) · [Manifesto raiz](https://github.com/guilhermehcaguiar/orbit/blob/main/package.json) |
+
+O endereço público do TransLog foi fornecido pelo autor e respondeu com HTTP 200. O repositório do colaborador também voltou a responder publicamente, e seu README aponta para o mesmo endereço.

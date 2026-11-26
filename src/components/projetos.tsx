@@ -111,12 +111,12 @@ export default function Projetos({
             <div className="featured-case-grid">
               <div className="featured-case-copy">
                 <p className="eyebrow">{dict.projects.featured}</p>
-                <h3 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
+                <h3 className="mt-2 text-3xl font-semibold tracking-tight sm:text-[2.5rem]">
                   {featured.name}
                 </h3>
                 <p className="mt-2 text-sm text-secondary">{featured.type}</p>
                 {featured.contribution && (
-                  <div className="case-contribution mt-5">
+                  <div className="case-contribution mt-4">
                     <p className="text-xs font-medium text-accentCyan">{dict.projects.contribution}</p>
                     <p className="mt-1 leading-relaxed text-primary">{featured.contribution}</p>
                   </div>

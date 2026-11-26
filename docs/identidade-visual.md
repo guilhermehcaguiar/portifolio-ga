@@ -63,3 +63,5 @@
 - O case começa pela contribuição confirmada e pelas ações de site e código. A galeria fica ao lado no desktop e vem logo depois no celular. Contexto, resultado e tecnologias completam o case, com as tecnologias mantidas uma por linha.
 - A hierarquia usa títulos descritivos. Os outros projetos usam cartões e uma lista expansível contínua. Sobre, Tecnologias, Além do código e Contato alternam listas, superfícies e divisórias para diferenciar cada seção.
 - Gradientes localizados e estados de foco, seleção e carregamento dão profundidade e retorno visual. O seletor de idioma tem alvos de 44 px. A paleta GA., Geist e a preferência por movimento reduzido continuam como base.
+
+- O card do Alambrado usa uma prévia de até 416 px com ampliação disponível e um rodapé compacto de contexto, resultado e tecnologias. Os controles de galeria continuam com 44 px de altura.

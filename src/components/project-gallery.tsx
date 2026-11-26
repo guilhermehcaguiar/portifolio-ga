@@ -10,6 +10,7 @@ export interface GalleryImage {
 }
 const reducedMotion = () =>
   matchMedia("(prefers-reduced-motion: reduce)").matches;
+const previewSizes = "(min-width: 1152px) 416px, (min-width: 768px) 38vw, (min-width: 500px) 416px, 90vw";
 const zoomTransform = (source: DOMRect, destination: DOMRect) =>
   `translate(${source.left - destination.left}px, ${source.top - destination.top}px) scale(${source.width / destination.width}, ${source.height / destination.height})`;
 
@@ -194,7 +195,7 @@ export default function ProjectGallery({
             alt={image.alt}
             width={1440}
             height={1000}
-            sizes="(min-width: 1024px) 560px, (min-width: 640px) 85vw, 90vw"
+            sizes={previewSizes}
             className="gallery-base"
           />
           {incoming !== null && (
@@ -205,7 +206,7 @@ export default function ProjectGallery({
               aria-hidden="true"
               width={1440}
               height={1000}
-              sizes="(min-width: 1024px) 560px, (min-width: 640px) 85vw, 90vw"
+              sizes={previewSizes}
               className="gallery-incoming"
               onLoad={(event) => finishCapture(incoming, event.currentTarget)}
               onError={() => {

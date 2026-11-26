@@ -85,7 +85,7 @@ export const projects: ProjectsData = {
       imageAlt:
         "Página inicial do Alambrado, com identidade própria e catálogo de camisas de futebol.",
       // URL e autoria integral confirmadas pelo usuário em 26/10/2026.
-      // Stack confirmada no README do repositório público em 26/10/2026.
+      // A lista descreve a stack do site público.
       technologies: [
         "Next.js",
         "React",
@@ -111,7 +111,15 @@ export const projects: ProjectsData = {
       // sem credenciais, dados internos ou detalhes operacionais.
       description:
         "Sistema de gestão financeira em operação, desenvolvido para controle de contas a pagar, fornecedores, relatórios e rotinas administrativas.",
-      technologies: ["React", "Vite", "Tailwind CSS", "Python", "FastAPI"],
+      technologies: [
+        "React",
+        "Vite",
+        "Tailwind CSS",
+        "Python",
+        "FastAPI",
+        "SQLAlchemy",
+        "PostgreSQL",
+      ],
       // Uso operacional confirmado pelo usuário; URL de acesso público não fornecida.
       deployUrl: null,
       isAcademic: false,
@@ -141,7 +149,7 @@ export const projects: ProjectsData = {
       type: "Plataforma educacional sobre IA",
       description:
         "Projeto de extensão da Uninassau para ensinar estudantes do ensino médio a usar inteligência artificial com responsabilidade. Reúne uma oficina, uma trilha de estudos, um laboratório e um quiz.",
-      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Lucide"],
       deployUrl: "https://beyondtheprompt-ia.vercel.app/",
       isAcademic: true,
       repositoryUrl: "https://github.com/guilhermehcaguiar/beyondtheprompt",
@@ -159,10 +167,12 @@ export const projects: ProjectsData = {
       technologies: [
         "React",
         "Vite",
+        "React Router",
         "Tailwind CSS",
         "Python",
         "Django",
         "Django REST Framework",
+        "SQLite",
       ],
       // PENDÊNCIA A5 — deploy público não confirmado.
       deployUrl: null,
@@ -175,11 +185,18 @@ export const projects: ProjectsData = {
       type: "Sistema de logística",
       description:
         "Sistema acadêmico para centralizar veículos, motoristas e ocorrências de uma operação de transporte.",
-      technologies: ["React", "JavaScript", "Vite", "React Router"],
-      // URL anterior retornou 404 público; aguarda novo destino confirmado.
-      deployUrl: null,
+      technologies: [
+        "React",
+        "JavaScript",
+        "Vite",
+        "React Router",
+        "Java",
+        "Spring Boot",
+        "PostgreSQL",
+      ],
+      deployUrl: "https://translogbr.vercel.app/",
       isAcademic: true,
-      repositoryUrl: null,
+      repositoryUrl: "https://github.com/arthurniceass-jpg/translog",
     },
     {
       key: "forma-store",
@@ -187,7 +204,15 @@ export const projects: ProjectsData = {
       type: "Loja institucional",
       description:
         "E-commerce acadêmico de moda oversized com catálogo, carrinho, autenticação demonstrativa e área de conta.",
-      technologies: ["React", "JavaScript", "Vite", "React Router"],
+      technologies: [
+        "React",
+        "JavaScript",
+        "Vite",
+        "React Router",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+      ],
       // PENDÊNCIA A5 — deploy público não confirmado.
       deployUrl: null,
       isAcademic: true,

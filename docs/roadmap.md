@@ -74,7 +74,7 @@ O usuário autorizou nesta conversa aplicar as melhorias da auditoria em uma eta
 
 1. Adicionar PDFs finais em `public/curriculos/guilherme-aguiar-pt-br.pdf` e `public/curriculos/guilherme-aguiar-en.pdf`; reiniciar/recompilar depois.
 2. Fornecer empresa, cargo, período e contribuições para a experiência; a seção permanece fora da página até integração autorizada.
-3. Confirmar novo destino público de TransLog e contribuições individuais detalhadas dos demais projetos.
+3. Confirmar contribuições individuais detalhadas dos projetos em que elas ainda não foram registradas. O [site e o repositório do TransLog](projetos.md#revisão-das-tecnologias-por-repositório) já foram verificados.
 4. Informar domínio público do portfólio, definir SITE_URL e autorizar deploy. A URL do Alambrado não é o domínio deste portfólio.
 5. Validar com leitor de tela e em outros navegadores/dispositivos, além dos checks de Chromium executados nesta etapa.
 
