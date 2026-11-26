@@ -19,24 +19,25 @@ export default function Contato({
       className="section"
     >
       <div className="container">
-        <div className="rounded-2xl border border-accentBlue/25 bg-surface p-6 sm:p-10">
-          <SectionHeading
-            id="contato"
-            kicker="05"
-            title={dict.contact.title}
-            lede={dict.contact.lede}
-          />
-          <div className="mt-7 flex flex-wrap gap-3">
-            <a href={`mailto:${email}`} className="button button-primary">
-              {dict.contact.email} <span aria-hidden="true">↗</span>
-            </a>
-            {resume && (
-              <a href={resume} download className="button button-secondary">
-                {dict.contact.resume} ↓
+        <div className="contact-panel">
+          <div>
+            <SectionHeading
+              id="contato"
+              title={dict.contact.title}
+              lede={dict.contact.lede}
+            />
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href={`mailto:${email}`} className="button button-primary">
+                {dict.contact.email} <span aria-hidden="true">↗</span>
               </a>
-            )}
+              {resume && (
+                <a href={resume} download className="button button-secondary">
+                  {dict.contact.resume} <span aria-hidden="true">↓</span>
+                </a>
+              )}
+            </div>
           </div>
-          <div className="mt-8 grid gap-4 border-t border-border pt-7 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr]">
+          <div className="contact-channels">
             {[...channels]
               .sort(
                 (a, b) => Number(b.key === "email") - Number(a.key === "email"),
@@ -50,17 +51,15 @@ export default function Contato({
                     href={channel.href!}
                     target={external ? "_blank" : undefined}
                     rel={external ? "noopener noreferrer" : undefined}
-                    className="contact-link rounded-lg py-3"
+                    className="contact-link"
                   >
-                    <span className="text-sm font-medium">
-                      {channel.label}{" "}
-                      <span aria-hidden="true" className="text-accentCyan">
-                        ↗
+                    <span className="min-w-0">
+                      <span className="block text-sm font-medium">{channel.label}</span>
+                      <span className="mt-1 block text-sm leading-relaxed break-words text-secondary">
+                        {channel.handle}
                       </span>
                     </span>
-                    <span className="mt-2 block break-all text-xs leading-relaxed text-secondary">
-                      {channel.handle}
-                    </span>
+                    <span aria-hidden="true" className="shrink-0 text-accentCyan">↗</span>
                     {external && <span className="sr-only">{dict.newTab}</span>}
                   </a>
                 );

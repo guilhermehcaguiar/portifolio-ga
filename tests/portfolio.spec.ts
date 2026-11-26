@@ -13,8 +13,8 @@ for (const [path, locale] of [
     await expect(page.locator("html")).toHaveAttribute("lang", locale);
     await expect(page.getByRole("main")).toHaveCount(1);
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
-    await expect(page.locator("details")).toHaveCount(4);
-    await expect(page.locator("#projetos article")).toHaveCount(3);
+    await expect(page.locator("#projetos details")).toHaveCount(4);
+    await expect(page.locator("#projetos article")).toHaveCount(4);
     await expect(page.locator("#projeto-alambrado")).toContainText("Alambrado");
     await expect(page.locator("#projeto-alambrado a").first()).toHaveAttribute(
       "href",
@@ -46,18 +46,30 @@ for (const [path, locale] of [
       overflow: false,
     });
     expect(structure.heroTop).toBeGreaterThan(81);
-    await expect(page.locator("#projeto-alambrado img")).toBeVisible();
-    expect(
-      await page
-        .locator("#projeto-alambrado img")
-        .evaluate(
-          (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
-        ),
-    ).toBe(true);
-    const summary = page.locator("summary").first();
+    const beyond = page.getByRole("article", { name: "Beyond the Prompt" });
+    await expect(beyond).toContainText(locale === "en" ? "Academic" : "Acadêmico");
+    await expect(beyond.getByRole("link").first()).toBeVisible();
+    expect(await beyond.evaluate((card) => card.previousElementSibling?.id)).toBe(
+      "projeto-alambrado",
+    );
+    for (const image of [page.locator("#projeto-alambrado img"), beyond.getByRole("img")]) {
+      await image.scrollIntoViewIfNeeded();
+      await expect.poll(() =>
+        image.evaluate((node: HTMLImageElement) => node.complete && node.naturalWidth > 0),
+      ).toBe(true);
+    }
+    const summary = page.locator("#projetos summary").first();
     await summary.focus();
     await page.keyboard.press("Enter");
-    await expect(page.locator("details").first()).toHaveAttribute("open", "");
+    await expect(page.locator("#projetos details").first()).toHaveAttribute("open", "");
+    await expect(beyond.getByRole("link").first()).toHaveAttribute(
+      "href",
+      "https://beyondtheprompt-ia.vercel.app/",
+    );
+    await expect(beyond.getByRole("link").nth(1)).toHaveAttribute(
+      "href",
+      "https://github.com/guilhermehcaguiar/beyondtheprompt",
+    );
     if (locale === "en") {
       await expect(page.locator("body")).not.toContainText(
         /Ver projetos|Conteúdo em definição|Enviar e-mail|Onde concentro/,

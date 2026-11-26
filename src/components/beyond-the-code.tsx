@@ -128,43 +128,43 @@ export default function BeyondTheCode({ interests, dict }: BeyondTheCodeProps) {
       id="beyond-the-code"
       aria-labelledby="beyond-the-code-title"
       tabIndex={-1}
-      className="section section-compact"
+      className="section interests-section"
     >
       <div className="container">
         <SectionHeading
           id="beyond-the-code"
-          kicker="04"
           title={dict.beyond.title}
           lede={dict.beyond.lede}
         />
 
         {interests.length > 0 && (
-          <div className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
             {interests.map((interest) => (
-              <article
-                key={interest.key}
-                className="border-t border-border pt-5"
-              >
-                {iconMap[interest.icon] ?? iconMap.sparkles}
-                <h3 className="mt-4 text-base font-semibold text-primary">
-                  {interest.title}
-                </h3>
-                {interest.description && (
-                  <p className="mt-2 text-sm leading-relaxed text-secondary">
-                    {interest.description}
-                  </p>
-                )}
-                {interest.link?.href && (
-                  <a
-                    href={interest.link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-flex text-accentBlue transition-colors hover:text-accentCyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentBlue"
-                  >
-                    {interest.link.label}
-                    <span className="sr-only"> {dict.newTab}</span>
-                  </a>
-                )}
+              <article key={interest.key} className="interest-item">
+                <div className="interest-icon">
+                  {iconMap[interest.icon] ?? iconMap.sparkles}
+                </div>
+                <div>
+                  <h3 className="text-base font-semibold text-primary">
+                    {interest.title}
+                  </h3>
+                  {interest.description && (
+                    <p className="mt-2 text-sm leading-relaxed text-secondary">
+                      {interest.description}
+                    </p>
+                  )}
+                  {interest.link?.href && (
+                    <a
+                      href={interest.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link mt-2"
+                    >
+                      {interest.link.label}
+                      <span className="sr-only"> {dict.newTab}</span>
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>

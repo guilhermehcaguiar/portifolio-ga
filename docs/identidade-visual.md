@@ -56,3 +56,10 @@
 - Controles: compressão discreta para scale(.97) durante o pressionamento.
 - Imagem ampliada: modal cresce a partir da miniatura e retorna a ela ao fechar.
 - Movimento reduzido cobre tanto CSS quanto animações JavaScript e alterações da preferência durante o uso.
+
+## Refinamento do portfólio — 25/11/2026
+
+- A abertura tem uma apresentação mais curta e uma prévia clicável com a captura real do catálogo do Alambrado. A composição fica lado a lado a partir de 768 px e empilha texto, ações e prévia no celular.
+- O case começa pela contribuição confirmada e pelas ações de site e código. A galeria fica ao lado no desktop e vem logo depois no celular. Contexto, resultado e tecnologias completam o case, com as tecnologias mantidas uma por linha.
+- A hierarquia usa títulos descritivos. Os outros projetos usam cartões e uma lista expansível contínua. Sobre, Tecnologias, Além do código e Contato alternam listas, superfícies e divisórias para diferenciar cada seção.
+- Gradientes localizados e estados de foco, seleção e carregamento dão profundidade e retorno visual. O seletor de idioma tem alvos de 44 px. A paleta GA., Geist e a preferência por movimento reduzido continuam como base.

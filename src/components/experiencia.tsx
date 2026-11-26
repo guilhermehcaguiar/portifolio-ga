@@ -35,7 +35,7 @@ export default function Experiencia({ items }: ExperienciaProps) {
       className="scroll-mt-28 border-t border-border py-24 sm:py-32"
     >
       <div className="mx-auto max-w-5xl px-6 sm:px-8">
-        <SectionHeading id="experiencia" kicker="03" title="Experiência" />
+        <SectionHeading id="experiencia" title="Experiência" />
 
         {realItems.length === 0 ? (
           <div className="mt-12 rounded-lg border border-dashed border-border p-6 font-mono text-sm text-secondary">

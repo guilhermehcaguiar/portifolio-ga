@@ -16,6 +16,7 @@ for (const [route, locale] of [
     });
     const stage = group.locator(".gallery-image-stage");
     const base = group.locator(".gallery-base");
+    const choices = group.locator(".gallery-choices button");
     await base.scrollIntoViewIfNeeded();
     await expect
       .poll(() =>
@@ -48,6 +49,11 @@ for (const [route, locale] of [
         })
         .click();
       await expect(stage).toHaveAttribute("aria-busy", "true");
+      await expect(choices.nth(0)).toHaveAttribute("aria-pressed", "true");
+      await expect(choices.nth(1)).toHaveAttribute("aria-pressed", "false");
+      await expect(group.getByRole("status")).toContainText(
+        locale === "pt" ? "Carregando captura" : "Loading screenshot",
+      );
       await expect(base).toHaveAttribute("src", /alambrado\.webp/);
       expect(
         Math.abs(
@@ -63,17 +69,26 @@ for (const [route, locale] of [
       "src",
       /alambrado-catalogo/,
     );
-    await group
-      .getByRole("button", {
-        name: locale === "pt" ? "Carrinho" : "Cart",
-        exact: true,
-      })
-      .click();
+    await expect(choices.nth(1)).toHaveAttribute("aria-pressed", "true");
+
+    const cartRequest = (url: URL) =>
+      url.pathname === "/_next/image" &&
+      (url.searchParams.get("url") ?? "").includes("alambrado-carrinho");
+    await page.route(cartRequest, (route) => route.abort(), { times: 1 });
+    await choices.nth(2).click();
+    const retry = group.getByRole("button", {
+      name: locale === "pt" ? "Tentar novamente" : "Try again",
+      exact: true,
+    });
+    await expect(retry).toBeVisible();
+    await expect(choices.nth(1)).toHaveAttribute("aria-pressed", "true");
+    await retry.click();
+    await expect(choices.nth(2)).toBeFocused();
     await expect(group.locator("img").first()).toHaveAttribute(
       "src",
       /alambrado-carrinho/,
     );
-    await group.locator(".gallery-choices button").evaluateAll((buttons) => {
+    await choices.evaluateAll((buttons) => {
       (buttons[0] as HTMLButtonElement).click();
       (buttons[1] as HTMLButtonElement).click();
       (buttons[2] as HTMLButtonElement).click();

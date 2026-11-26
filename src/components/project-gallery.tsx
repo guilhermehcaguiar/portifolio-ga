@@ -18,20 +18,27 @@ export default function ProjectGallery({
   label,
   enlarge,
   close,
+  loading,
+  error,
+  retry,
 }: {
   images: GalleryImage[];
   label: string;
   enlarge: string;
   close: string;
+  loading: string;
+  error: string;
+  retry: string;
 }) {
   const [displayed, setDisplayed] = useState(0);
-  const [requested, setRequested] = useState(0);
   const [incoming, setIncoming] = useState<number | null>(null);
+  const [failed, setFailed] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
   const displayedRef = useRef(0);
   const requestedRef = useRef(0);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const choicesRef = useRef<HTMLDivElement>(null);
   const sourceRect = useRef<DOMRect | null>(null);
   const captureAnimation = useRef<Animation | null>(null);
   const zoomAnimation = useRef<Animation | null>(null);
@@ -90,11 +97,11 @@ export default function ProjectGallery({
   }, [open]);
 
   const choose = (index: number) => {
+    setFailed(null);
     if (requestedRef.current === index) return;
     captureAnimation.current?.cancel();
     captureAnimation.current = null;
     requestedRef.current = index;
-    setRequested(index);
     setIncoming(index === displayedRef.current ? null : index);
   };
   const finishCapture = (index: number, element: HTMLImageElement) => {
@@ -204,7 +211,7 @@ export default function ProjectGallery({
               onError={() => {
                 if (requestedRef.current !== incoming) return;
                 requestedRef.current = displayedRef.current;
-                setRequested(displayedRef.current);
+                setFailed(incoming);
                 setIncoming(null);
               }}
             />
@@ -225,18 +232,31 @@ export default function ProjectGallery({
           {enlarge}
         </span>
       </button>
-      <div className="gallery-choices">
+      <div ref={choicesRef} className="gallery-choices">
         {images.map((item, index) => (
           <button
             key={item.src}
             type="button"
-            aria-pressed={requested === index}
+            aria-pressed={displayed === index}
+            data-pending={incoming === index || undefined}
             onClick={() => choose(index)}
           >
             {item.label}
           </button>
         ))}
       </div>
+      <div role="status" className={incoming === null ? "sr-only" : "gallery-progress"}>
+        {incoming === null ? "" : `${loading} · ${images[incoming].label}`}
+      </div>
+      {failed !== null && (
+        <div className="gallery-error">
+          <p role="status">{error}</p>
+          <button type="button" onClick={() => {
+            choicesRef.current?.querySelectorAll("button")[failed]?.focus();
+            choose(failed);
+          }}>{retry}</button>
+        </div>
+      )}
       <dialog
         ref={dialogRef}
         className="image-dialog"

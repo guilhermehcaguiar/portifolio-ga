@@ -2,7 +2,7 @@ import type { Dictionary } from "@/i18n/dictionary";
 import { getSectionLinks } from "@/lib/section-links";
 export default function Footer({ dict }: { dict: Dictionary }) {
   return (
-    <footer className="border-t border-border py-9">
+    <footer className="site-footer border-t border-border py-8">
       <div className="container">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <a

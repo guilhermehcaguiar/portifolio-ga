@@ -111,7 +111,7 @@ npm start
 node scripts/generate-social-image.mjs
 ```
 
-Domínio e deploy do portfólio continuam pendentes. Commits são responsabilidade do proprietário; agentes seguem [AGENTS.md](AGENTS.md) e não executam commit ou push automaticamente.
+O portfólio está publicado em [guilhermeaguiar-dev.vercel.app](https://guilhermeaguiar-dev.vercel.app/). O projeto na Vercel usa Node.js 22 e recebe atualizações automáticas quando novos commits chegam à branch `main` do repositório remoto. `SITE_URL` está configurada no ambiente de produção da Vercel. Commits e pushes são responsabilidade do proprietário, conforme [AGENTS.md](AGENTS.md).
 
 ## O que versionar
 

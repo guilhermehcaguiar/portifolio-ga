@@ -14,11 +14,9 @@ export interface Dictionary {
   newTab: string;
   hero: {
     kicker: string;
-    title: string;
     description: string;
     projects: string;
     contact: string;
-    note: string;
     featured: string;
   };
   projects: {
@@ -39,6 +37,10 @@ export interface Dictionary {
     cartImage: string;
     enlarge: string;
     closeImage: string;
+    loadingImage: string;
+    imageError: string;
+    retryImage: string;
+    technologies: string;
   };
   about: { title: string; focus: string };
   stack: { title: string; lede: string };

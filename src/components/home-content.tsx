@@ -11,9 +11,12 @@ import { getResume } from "@/lib/resume";
 export default function HomeContent({ locale }: { locale: Locale }) {
   const data = getPortfolio(locale);
   const dict = getDictionary(locale);
+  const featured = data.projects.main.find(
+    (project) => project.key === "alambrado" && project.isFeatured,
+  );
   return (
     <>
-      <Hero dict={dict} />
+      <Hero dict={dict} featured={featured} />
       <Projetos projects={data.projects} dict={dict} />
       <Sobre about={data.about} dict={dict} />
       <Stack categories={data.stack} dict={dict} />

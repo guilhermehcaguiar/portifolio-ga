@@ -42,17 +42,15 @@ export const hero: HeroData = {
 // Conteúdo baseado no perfil verificado e nas informações confirmadas pelo usuário.
 export const about: AboutData = {
   paragraphs: [
-    "Sou Guilherme Aguiar, desenvolvedor de software e estudante de Ciência da Computação. Meu interesse por tecnologia envolve lógica de programação, construção de sistemas e resolução de problemas, conectando fundamentos da computação a aplicações práticas.",
-    "Atualmente, desenvolvo principalmente projetos de front-end, muito por conta das atividades da faculdade, e sigo aprofundando minha prática com React. Essa experiência se soma à minha trajetória em TI, ao desenvolvimento web e às automações em Python para processos de negócio, com projetos que vão de ferramentas de consulta a aplicações de e-commerce e produtividade estudantil.",
-    "No Alambrado, fui responsável por todo o planejamento, desenvolvimento e deploy. Acompanhar uma ideia até sua publicação me permite conectar apresentação, navegação e implementação em um mesmo projeto.",
-    "Também aprofundo meus estudos em Java e Python e tenho muito interesse em Machine Learning e cibersegurança. Exploro hardware e automação para ampliar minha compreensão sobre como software, dispositivos e sistemas se conectam. Aprendo construindo e uso cada projeto como oportunidade de aprofundar fundamentos e experimentar soluções em diferentes áreas da computação.",
+    "Sou desenvolvedor de software e estou no quarto período de Ciência da Computação. No estágio em TI, trabalhei com suporte técnico, hardware e sistemas internos. Também desenvolvo aplicações web completas e já usei automação para simplificar rotinas de trabalho.",
+    "Num projeto, começo por entender quem vai usar a aplicação e onde o problema aparece. Depois acompanho o caminho dos dados entre a interface, as regras de negócio e o banco. Quando surge uma dúvida, consulto a documentação e faço um teste pequeno para entender o que está acontecendo.",
   ],
   focusAreas: [
-    "Front-end com React",
-    "Java",
-    "Python",
-    "Machine Learning",
-    "Cibersegurança",
+    "Desenvolvimento full-stack",
+    "Arquitetura e integração de sistemas",
+    "IA e aprendizado de máquina",
+    "Linux e infraestrutura",
+    "Segurança de aplicações",
   ],
 };
 
@@ -134,6 +132,21 @@ export const projects: ProjectsData = {
       deployUrl: null,
       isAcademic: false,
       repositoryUrl: "https://github.com/guilhermehcaguiar/AutoFilter-Search",
+    },
+  ],
+  spotlight: [
+    {
+      key: "beyond-the-prompt",
+      name: "Beyond the Prompt",
+      type: "Plataforma educacional sobre IA",
+      description:
+        "Projeto de extensão da Uninassau para ensinar estudantes do ensino médio a usar inteligência artificial com responsabilidade. Reúne uma oficina, uma trilha de estudos, um laboratório e um quiz.",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      deployUrl: "https://beyondtheprompt-ia.vercel.app/",
+      isAcademic: true,
+      repositoryUrl: "https://github.com/guilhermehcaguiar/beyondtheprompt",
+      image: "/projetos/beyond-the-prompt.webp",
+      imageAlt: "Arte do Beyond the Prompt com um diagrama de rede neural e referência à trilha, ao laboratório e ao quiz.",
     },
   ],
   secondary: [
@@ -240,7 +253,7 @@ export const beyondInterests: BeyondInterest[] = [
     key: "projetos-pessoais",
     title: "Projetos pessoais",
     description:
-      "Um espaço para transformar ideias em aplicações e continuar aprendendo na prática.",
+      "Meus projetos autorais partem de problemas como organizar tarefas ou acompanhar contas. Neles, testo tecnologias e ajusto a aplicação até ela servir à rotina para a qual foi pensada.",
     icon: "git-branch",
     link: null,
   },
@@ -248,7 +261,7 @@ export const beyondInterests: BeyondInterest[] = [
     key: "eletronica",
     title: "Eletrônica",
     description:
-      "Exploração de hardware e eletrônica, conectando o estudo de componentes ao funcionamento dos dispositivos e à interação com software.",
+      "Na eletrônica, estudo como microcontroladores leem sensores e controlam dispositivos. Gosto de investigar esse caminho na prática, da leitura do sinal à resposta de um sistema embarcado.",
     icon: "cpu",
     link: null,
   },
@@ -256,7 +269,7 @@ export const beyondInterests: BeyondInterest[] = [
     key: "linux",
     title: "Linux",
     description:
-      "Curiosidade por sistemas, ferramentas e possibilidades de personalização do ambiente de desenvolvimento.",
+      "Uso Linux para desenvolver e monto meu ambiente com ferramentas de terminal e de código aberto. Ajustar esse ambiente me ajuda a entender o que acontece por trás dos comandos.",
     icon: "terminal",
     link: null,
   },
@@ -264,15 +277,15 @@ export const beyondInterests: BeyondInterest[] = [
     key: "automacao",
     title: "Automação",
     description:
-      "Exploração de automação para conectar software e rotinas práticas, organizar processos e reduzir tarefas repetitivas.",
+      "Quando uma rotina exige copiar ou conferir os mesmos dados à mão, avalio o que o software pode assumir. Conectar os sistemas costuma eliminar etapas manuais e reduzir retrabalho.",
     icon: "zap",
     link: null,
   },
   {
     key: "ia-local",
-    title: "Machine Learning e IA local",
+    title: "IA e modelos locais",
     description:
-      "Interesse em Machine Learning, no funcionamento de modelos e nas possibilidades de executá-los no ambiente local.",
+      "Executo modelos no meu computador para entender como se comportam, onde erram e em que tarefas podem ajudar. Esses experimentos dão contexto ao que estudo sobre aprendizado de máquina.",
     icon: "bot",
     link: null,
   },
@@ -280,7 +293,7 @@ export const beyondInterests: BeyondInterest[] = [
     key: "ciberseguranca",
     title: "Cibersegurança",
     description:
-      "Interesse em compreender como proteger sistemas e informações e desenvolver uma visão de segurança na construção de software.",
+      "Penso em segurança ao decidir quais dados guardar e quem deve acessá-los. Estudo vulnerabilidades comuns e o que posso fazer no desenvolvimento para reduzir esses riscos.",
     icon: "shield",
     link: null,
   },
@@ -328,6 +341,13 @@ const englishProjects: Record<ProjectKey, ProjectCopy> = {
     description:
       "An academic veterinary management system covering appointments, patients, owners and medical records.",
   },
+  "beyond-the-prompt": {
+    type: "AI education platform",
+    description:
+      "A Uninassau university outreach project that teaches high school students to use artificial intelligence responsibly. It offers a workshop, a learning path, a lab and a quiz.",
+    imageAlt:
+      "Beyond the Prompt artwork with a neural network diagram and references to the learning path, lab and quiz.",
+  },
   translog: {
     type: "Logistics system",
     description:
@@ -350,32 +370,32 @@ const englishInterests: Record<string, { title: string; description: string }> =
     "projetos-pessoais": {
       title: "Personal projects",
       description:
-        "A space to turn ideas into applications and keep learning through practice.",
+        "I start personal projects with problems like keeping track of tasks or managing bills. I try new tools along the way and judge the result by how well it fits the routine I built it for.",
     },
     eletronica: {
       title: "Electronics",
       description:
-        "Exploring hardware and electronics, connecting the study of components to how devices work and interact with software.",
+        "I study how microcontrollers read sensors and control devices. What I enjoy about electronics is tracing how an embedded system turns a sensor reading into a response.",
     },
     linux: {
       title: "Linux",
       description:
-        "Curiosity about systems, tools and ways to customize a development environment.",
+        "Linux is my development environment. I build my setup around command-line and open-source tools, and customizing it helps me understand what the system does when I run a command.",
     },
     automacao: {
       title: "Automation",
       description:
-        "Exploring automation to connect software with practical routines, organize processes and reduce repetitive tasks.",
+        "When a workflow involves copying or checking the same data by hand, I look for a step software can take over. Connecting the systems can cut down on repeat work.",
     },
     "ia-local": {
-      title: "Machine Learning and local AI",
+      title: "AI and local models",
       description:
-        "An interest in Machine Learning, how models work and the possibilities of running them locally.",
+        "Running models on my own computer lets me see how they behave, where they fail and which tasks they can help with. Those experiments ground my study of machine learning.",
     },
     ciberseguranca: {
       title: "Cybersecurity",
       description:
-        "An interest in understanding how to protect systems and information and bringing a security perspective to software development.",
+        "Security shapes decisions about what data to store and who should have access. I study common vulnerabilities and the choices I can make during development to reduce those risks.",
     },
   };
 
@@ -395,22 +415,21 @@ export function getPortfolio(locale: Locale) {
     about: isEnglish
       ? {
           paragraphs: [
-            "I’m Guilherme Aguiar, a software developer and Computer Science student. My interest in technology includes programming logic, building systems and solving problems, connecting computing fundamentals to practical applications.",
-            "Most of my current projects focus on front-end development, largely through university coursework, and I continue to deepen my practice with React. This builds on my background in IT, web development and Python automation for business processes, with projects ranging from lookup tools to e-commerce and student productivity applications.",
-            "For Alambrado, I handled all planning, development and deployment. Taking an idea through to publication lets me connect presentation, navigation and implementation within one project.",
-            "I’m also deepening my knowledge of Java and Python and have a strong interest in Machine Learning and cybersecurity. I explore hardware and automation to broaden my understanding of how software, devices and systems connect. I learn by building and use each project to strengthen my foundations and try solutions across different areas of computing.",
+            "I’m a software developer in my fourth semester of a computer science degree. My IT internship gave me hands-on experience with technical support, hardware and internal systems. I also build complete web applications and have used automation to simplify workflows.",
+            "I start a project by finding out who will use it and where the problem shows up. From there, I trace how data moves through the interface, application logic and database. If I’m unsure how something works, I read the documentation and put together a small test.",
           ],
           focusAreas: [
-            "Front-end with React",
-            "Java",
-            "Python",
-            "Machine Learning",
-            "Cybersecurity",
+            "Full-stack development",
+            "Software architecture and integration",
+            "AI and machine learning",
+            "Linux and infrastructure",
+            "Application security",
           ],
         }
       : about,
     projects: {
       main: projects.main.map(localizeProject),
+      spotlight: projects.spotlight.map(localizeProject),
       secondary: projects.secondary.map(localizeProject),
     },
     stack: stack.map((category) => ({

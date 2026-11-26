@@ -17,8 +17,7 @@ import type { StackCategory } from "@/types/portfolio";
 /**
  * Stack — Etapas A3.3/A5
  *
- * Seção "Stack" (kicker 04): tecnologias organizadas por categorias em
- * chips [ícone] Nome, sem barras de proficiência ou porcentagens.
+ * Tecnologias organizadas por categorias, sem barras de proficiência.
  * Categorias sem itens não renderizam (slots vazios permanecem invisíveis
  * até preenchidos em @/data/portfolio).
  *
@@ -142,26 +141,25 @@ export default function Stack({ categories, dict }: StackProps) {
       <div className="container">
         <SectionHeading
           id="stack"
-          kicker="03"
           title={dict.stack.title}
           lede={dict.stack.lede}
         />
 
         {visibleCategories.length > 0 && (
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="stack-matrix mt-8 grid sm:grid-cols-2 lg:grid-cols-3">
             {visibleCategories.map((category) => (
               <article
                 key={category.key}
-                className="rounded-lg border border-border bg-surface p-6"
+                className="stack-category"
               >
-                <h3 className="font-mono text-sm uppercase tracking-widest text-accentCyan">
+                <h3 className="text-base font-semibold">
                   {category.title}
                 </h3>
-                <ul className="mt-5 flex flex-col items-start gap-2">
+                <ul className="mt-4 flex flex-col items-start gap-2.5">
                   {category.items.map((item) => (
                     <li
                       key={item}
-                      className="inline-flex items-center gap-1.5 rounded border border-border px-2.5 py-1 font-mono text-xs text-secondary"
+                      className="inline-flex items-center gap-2.5 text-sm text-secondary"
                     >
                       {techIcons[item] ?? fallbackTechIcon}
                       <span>{item}</span>

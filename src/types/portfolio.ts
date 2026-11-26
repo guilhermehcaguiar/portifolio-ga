@@ -20,6 +20,7 @@ export type ProjectKey =
   | "alambrado"
   | "autoshop-payables"
   | "autofilter-search"
+  | "beyond-the-prompt"
   | "vetcare"
   | "translog"
   | "forma-store"
@@ -44,6 +45,7 @@ export interface Project {
 
 export interface ProjectsData {
   main: Project[];
+  spotlight: Project[];
   secondary: Project[];
 }
 

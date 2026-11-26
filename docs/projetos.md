@@ -24,8 +24,13 @@
 
 ## Ordem Atual de Destaque
 1. Alambrado (e-commerce público)
-2. AutoShop Payables (sistema interno)
-3. AutoFilter Search (sistema interno)
+2. Beyond the Prompt (destaque acadêmico)
+3. AutoShop Payables (sistema interno)
+4. AutoFilter Search (sistema interno)
+
+### Beyond the Prompt
+
+Plataforma educacional sobre uso responsável de IA, criada em equipe como projeto de extensão da Uninassau. Tem cartão próprio com [arte oficial do projeto](https://beyondtheprompt-ia.vercel.app/social.png), [site publicado](https://beyondtheprompt-ia.vercel.app/) e [repositório](https://github.com/guilhermehcaguiar/beyondtheprompt).
 
 ## Projetos Secundários (compactos)
 - **VetCare** — sistema veterinário (informações confirmadas, consulta separada)

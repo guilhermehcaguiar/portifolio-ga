@@ -13,12 +13,12 @@ export default function Sobre({
       id="sobre"
       tabIndex={-1}
       aria-labelledby="sobre-title"
-      className="section"
+      className="section about-section"
     >
-      <div className="container">
-        <SectionHeading id="sobre" kicker="02" title={dict.about.title} />
-        <div className="mt-8 grid gap-10 lg:grid-cols-[1.5fr_0.7fr] lg:gap-16">
-          <div className="space-y-5">
+      <div className="container about-layout">
+        <div>
+          <SectionHeading id="sobre" title={dict.about.title} />
+          <div className="mt-6 max-w-2xl space-y-5">
             {about.paragraphs.map((paragraph, index) => (
               <p
                 key={index}
@@ -28,21 +28,21 @@ export default function Sobre({
               </p>
             ))}
           </div>
-          <aside className="self-start rounded-xl border border-border bg-surface p-6">
-            <h3 className="eyebrow">{dict.about.focus}</h3>
-            <ul className="mt-5 space-y-4">
-              {about.focusAreas.map((area) => (
-                <li key={area} className="flex items-center gap-3 text-sm">
-                  <span
-                    aria-hidden="true"
-                    className="h-1.5 w-1.5 rounded-full bg-accentBlue"
-                  />
-                  {area}
-                </li>
-              ))}
-            </ul>
-          </aside>
         </div>
+        <aside className="about-focus">
+          <h3 className="text-lg font-semibold">{dict.about.focus}</h3>
+          <ul className="mt-4 divide-y divide-border">
+            {about.focusAreas.map((area) => (
+              <li key={area} className="flex items-center gap-3 py-3 text-sm text-secondary">
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-accentBlue"
+                />
+                {area}
+              </li>
+            ))}
+          </ul>
+        </aside>
       </div>
     </section>
   );

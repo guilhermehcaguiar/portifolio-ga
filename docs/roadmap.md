@@ -112,3 +112,13 @@ Autorizados e implementados os cinco efeitos propostos: crossfade da galeria, en
 ### Revisão de documentação e versionamento — 26/10/2026
 
 README atualizado com funcionalidades, setup Windows/Linux, ambiente, currículos, estrutura, testes, publicação e explicação da pasta .github. Gitignore organizado para dependências, builds, relatórios, ambiente local, logs, temporários, arquivos de sistema e chaves. .github, documentação, código, assets públicos, currículos finais, .env.example e lockfile continuam versionáveis. Workflow revisado sem alteração: executa checks em push/PR. Nenhum commit ou push executado.
+
+### Refinamento integrado de UI/UX — 25/11/2026
+
+A abertura ganhou uma prévia do catálogo do Alambrado. O case prioriza autoria e acesso à demonstração. As demais seções receberam títulos descritivos, novas composições e ajustes de leitura em português e inglês. A galeria comunica o carregamento e permite tentar novamente se uma captura falhar.
+
+Build, lint e TypeScript aprovados. A revisão visual em Edge usou 390 e 1440 px nos dois idiomas. A suíte de navegador cobriu cinco larguras de 320 a 1440 px. Passaram 49 testes na primeira execução. O teste restante excedeu o tempo no encerramento do contexto do navegador e passou ao rodar isoladamente.
+
+### Publicação na Vercel — 25/11/2026
+
+O portfólio foi publicado em [guilhermeaguiar-dev.vercel.app](https://guilhermeaguiar-dev.vercel.app/), com `SITE_URL` configurada em produção e integração com a branch `main` do GitHub. A primeira publicação usou os arquivos locais, incluindo o Beyond the Prompt e a atualização do Next.js para 16.4.6. As rotas `/`, `/en` e `/sitemap.xml` retornaram HTTP 200 no domínio público. A medição de desempenho em produção continua pendente.

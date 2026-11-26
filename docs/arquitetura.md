@@ -2,9 +2,11 @@
 
 ## Stack
 
-Next.js 16.4.3, React 19.3.0, TypeScript, Tailwind CSS 4, Geist/Geist Mono e Simple Icons. Playwright é dependência de desenvolvimento para checks de navegador. Node.js 22 é a versão de referência da CI. Use `npm ci` para reproduzir o lockfile.
+Next.js 16.4.6, React 19.3.0, TypeScript, Tailwind CSS 4, Geist/Geist Mono e Simple Icons. Playwright é dependência de desenvolvimento para checks de navegador. Node.js 22 é a versão de referência da CI e da produção. Use `npm ci` para reproduzir o lockfile.
 
 Next.js e eslint-config-next passaram de 16.4.0 para 16.4.3 em 26/10/2026 para corrigir vulnerabilidades reportadas pelo npm audit, não apenas por atualização de versão. A dependência transitiva Zod também recebeu correção compatível. O audit terminou sem vulnerabilidades conhecidas.
+
+Na preparação da publicação, Next.js e eslint-config-next foram atualizados para 16.4.6. O audit das dependências de produção voltou a reportar zero vulnerabilidades conhecidas.
 
 ## Rotas e documento
 
@@ -17,7 +19,7 @@ Next.js e eslint-config-next passaram de 16.4.0 para 16.4.3 em 26/10/2026 para c
 
 ## Conteúdo e traduções
 
-Fatos, URLs e textos pessoais vivem em `src/data/portfolio.ts`. `getPortfolio(locale)` retorna os textos do idioma preservando os dados comuns. `ProjectKey` define os sete IDs de projeto; `Record<ProjectKey, ProjectCopy>` exige tradução para todos eles. Tecnologias adicionais da migração incompleta não foram assumidas como habilidades confirmadas.
+Fatos, URLs e textos pessoais vivem em `src/data/portfolio.ts`. `getPortfolio(locale)` retorna os textos do idioma preservando os dados comuns. `ProjectKey` define os IDs de projeto; `Record<ProjectKey, ProjectCopy>` exige tradução para todos eles. Tecnologias adicionais da migração incompleta não foram assumidas como habilidades confirmadas.
 
 `src/i18n/dictionary.ts` exige os mesmos rótulos de interface em PT/EN. `src/lib/section-links.ts` constrói links a partir do dicionário; não existe link público para experiência vazia. A seção antiga de experiência permanece disponível para futura integração com dados reais.
 
@@ -47,11 +49,11 @@ A variável `SITE_URL` deve ser a origem pública confirmada do PORTFÓLIO. Quan
 
 Checks: `npm run lint`, `npm run build`, `npm run typecheck`, `npm run test:e2e`. Os testes de produção em Chromium cobrem os dois idiomas em 320/375/768/1024/1440 px, conteúdo, imagem, teclado, seleção de idioma e integridade estrutural. Workflow `.github/workflows/quality.yml` executa os checks em push/PR.
 
-Nenhum agente realiza commit, push ou deploy automaticamente. Publicação e dados de experiência continuam pendentes. Consultar roadmap para a evidência final desta revisão.
+Commits e pushes são de responsabilidade do proprietário. Deploy exige autorização explícita. A Vercel está ligada à branch `main` do repositório e publica o domínio `guilhermeaguiar-dev.vercel.app`. Os dados de experiência continuam pendentes.
 
 ## Posicionamento de conteúdo atualizado
 
-Apresentação profissional: Software Developer / Desenvolvedor de Software. A maior parte dos projetos atuais é em front-end, muito por influência da faculdade; isso descreve o volume atual de projetos. Estudos em aprofundamento: front-end com React, Java e Python, mantendo interesse e estudo em outras áreas da computação. Interesses confirmados: Machine Learning e cibersegurança; exploração adicional de hardware e automação. O card de Sobre se chama Estudos e interesses atuais para distinguir estudo/interesse de experiência comprovada. Esses interesses aparecem também em Explorando e nos cards de interesses, sem sugerir especialização ou atuação profissional não confirmada.
+Apresentação profissional: Software Developer / Desenvolvedor de Software. O hero descreve o foco atual de parte dos projetos em front-end. Sobre apresenta a graduação em Ciência da Computação, a prática no estágio de TI e o desenvolvimento de aplicações completas. O card de foco reúne áreas de estudo, e Além do código descreve projetos próprios e experimentos. Os textos em português e inglês distinguem prática confirmada, estudo e interesse.
 
 ## Galeria, navegação e movimento — revisão autorizada
 
@@ -72,3 +74,7 @@ Apresentação profissional: Software Developer / Desenvolvedor de Software. A m
 5. O dialog usa os limites da miniatura e do modal para interpolar posição e escala na abertura (260 ms) e retorno (200 ms). Escape, backdrop e botão compartilham o fechamento; cliques repetidos são protegidos. Ativar movimento reduzido durante uma animação a finaliza imediatamente. Sem Element.animate, as operações são instantâneas.
 
 Nenhuma dependência ou biblioteca de animação foi adicionada.
+
+## Prévia do projeto e estados da galeria
+
+A abertura usa a captura WebP já autorizada do catálogo do Alambrado, servida diretamente. O link leva ao case na própria página. Na galeria, a seleção representa a captura exibida. Enquanto uma nova captura carrega, um status traduzido informa o progresso e o controle solicitado tem indicação visual própria. Em caso de falha, a captura anterior permanece visível e a nova tentativa devolve o foco ao controle correspondente.
