@@ -13,8 +13,8 @@ for (const [path, locale] of [
     await expect(page.locator("html")).toHaveAttribute("lang", locale);
     await expect(page.getByRole("main")).toHaveCount(1);
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
-    await expect(page.locator("#projetos details")).toHaveCount(4);
-    await expect(page.locator("#projetos article")).toHaveCount(4);
+    await expect(page.locator("#projetos details")).toHaveCount(3);
+    await expect(page.locator("#projetos article")).toHaveCount(5);
     await expect(page.locator("#projeto-alambrado")).toContainText("Alambrado");
     await expect(page.locator("#projeto-alambrado a").first()).toHaveAttribute(
       "href",
@@ -47,6 +47,17 @@ for (const [path, locale] of [
     });
     expect(structure.heroTop).toBeGreaterThan(81);
     const beyond = page.getByRole("article", { name: "Beyond the Prompt" });
+    const translog = page.getByRole("article", { name: "TransLog" });
+    await expect(translog).toContainText(locale === "en" ? "Academic" : "Acadêmico");
+    await expect(translog.getByRole("link").first()).toBeVisible();
+    await expect(translog.getByRole("link").first()).toHaveAttribute(
+      "href",
+      "https://translogbr.vercel.app/",
+    );
+    await expect(translog.getByRole("link").nth(1)).toHaveAttribute(
+      "href",
+      "https://github.com/arthurniceass-jpg/translog",
+    );
     await expect(beyond).toContainText(locale === "en" ? "Academic" : "Acadêmico");
     await expect(beyond.getByRole("link").first()).toBeVisible();
     expect(await beyond.evaluate((card) => card.previousElementSibling?.id)).toBe(

@@ -156,6 +156,25 @@ export const projects: ProjectsData = {
       image: "/projetos/beyond-the-prompt.webp",
       imageAlt: "Arte do Beyond the Prompt com um diagrama de rede neural e referência à trilha, ao laboratório e ao quiz.",
     },
+    {
+      key: "translog",
+      name: "TransLog",
+      type: "Sistema de logística",
+      description:
+        "Sistema acadêmico para centralizar veículos, motoristas e ocorrências de uma operação de transporte.",
+      technologies: [
+        "React",
+        "JavaScript",
+        "Vite",
+        "React Router",
+        "Java",
+        "Spring Boot",
+        "PostgreSQL",
+      ],
+      deployUrl: "https://translogbr.vercel.app/",
+      isAcademic: true,
+      repositoryUrl: "https://github.com/arthurniceass-jpg/translog",
+    },
   ],
   secondary: [
     {
@@ -178,25 +197,6 @@ export const projects: ProjectsData = {
       deployUrl: null,
       isAcademic: true,
       repositoryUrl: "https://github.com/guilhermehcaguiar/VetCare",
-    },
-    {
-      key: "translog",
-      name: "TransLog",
-      type: "Sistema de logística",
-      description:
-        "Sistema acadêmico para centralizar veículos, motoristas e ocorrências de uma operação de transporte.",
-      technologies: [
-        "React",
-        "JavaScript",
-        "Vite",
-        "React Router",
-        "Java",
-        "Spring Boot",
-        "PostgreSQL",
-      ],
-      deployUrl: "https://translogbr.vercel.app/",
-      isAcademic: true,
-      repositoryUrl: "https://github.com/arthurniceass-jpg/translog",
     },
     {
       key: "forma-store",

@@ -25,16 +25,20 @@
 ## Ordem Atual de Destaque
 1. Alambrado (e-commerce público)
 2. Beyond the Prompt (destaque acadêmico)
-3. AutoShop Payables (sistema interno)
-4. AutoFilter Search (sistema interno)
+3. TransLog (destaque acadêmico)
+4. AutoShop Payables (sistema interno)
+5. AutoFilter Search (sistema interno)
 
 ### Beyond the Prompt
 
 Plataforma educacional sobre uso responsável de IA, criada em equipe como projeto de extensão da Uninassau. Tem cartão próprio com [arte oficial do projeto](https://beyondtheprompt-ia.vercel.app/social.png), [site publicado](https://beyondtheprompt-ia.vercel.app/) e [repositório](https://github.com/guilhermehcaguiar/beyondtheprompt).
 
+### TransLog
+
+Sistema de logística acadêmico. Tem cartão próprio com acesso direto ao [site publicado](https://translogbr.vercel.app/) e ao [repositório](https://github.com/arthurniceass-jpg/translog).
+
 ## Projetos Secundários (compactos)
 - **VetCare** — sistema veterinário (informações confirmadas, consulta separada)
-- **TransLog** — sistema de logística acadêmico. [Site publicado](https://translogbr.vercel.app/) e [repositório](https://github.com/arthurniceass-jpg/translog).
 - **FORMA Store** — loja institucional
 - **Orbit** — Sistema Integrado Estudantil
 

@@ -322,13 +322,16 @@ summary {
 }
 .project-spotlight {
   display: grid;
-  grid-template-areas: "copy" "media" "stack";
+  grid-template-areas: "copy" "stack";
   gap: clamp(18px, 3vw, 38px);
   align-items: center;
   padding: clamp(18px, 3vw, 38px);
   border: 1px solid #3a5173;
   border-radius: 20px;
   background: radial-gradient(ellipse at top right, #1b3260, var(--surface) 70%);
+}
+.project-spotlight:has(> .project-spotlight-media) {
+  grid-template-areas: "copy" "media" "stack";
 }
 .project-spotlight-copy {
   grid-area: copy;
@@ -443,8 +446,7 @@ summary {
   }
 }
 @media (min-width: 768px) {
-  .hero-layout,
-  .project-spotlight {
+  .hero-layout {
     grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
     align-items: center;
   }
@@ -452,10 +454,21 @@ summary {
     grid-template-columns: minmax(0, 1.36fr) minmax(0, 1fr);
   }
   .project-spotlight {
+    grid-template-columns: minmax(0, 1fr) minmax(140px, .35fr);
+    grid-template-areas: "copy stack";
+  }
+  .project-spotlight:has(> .project-spotlight-media) {
+    grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
     grid-template-areas:
       "copy media"
       "stack media";
     row-gap: 18px;
+  }
+  .project-spotlight:not(:has(> .project-spotlight-media)) > .project-spotlight-stack {
+    padding-block-start: 0;
+    padding-inline-start: 20px;
+    border-top: 0;
+    border-inline-start: 1px solid var(--border);
   }
   .project-preview-column {
     border-inline-start: 1px solid var(--border);
